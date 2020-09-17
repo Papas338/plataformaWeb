@@ -23,7 +23,17 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(t.Password) < 6 {
-		http.Error(w, "Desbe especificar una contraseña de al menos 6 caracteres", 400)
+		http.Error(w, "Debe especificar una contraseña de al menos 6 caracteres", 400)
+		return
+	}
+
+	if t.Role != "Administrador" && t.Role != "Usuario" {
+		http.Error(w, "Debe ingresar una rol valido", 400)
+		return
+	}
+
+	if t.IsValidate != "Yes" && t.IsValidate != "No" {
+		http.Error(w, "Debe ingresar una opción valida", 400)
 		return
 	}
 

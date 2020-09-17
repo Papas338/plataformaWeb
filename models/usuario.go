@@ -9,6 +9,6 @@ type Usuario struct {
 	ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
 	Email      string             `bson:"email" json:"email"`
 	Password   string             `bson:"password" json:"password,omitempty"`
-	Role       string             `bson:"ubicacion" json:"ubicacion,omitempty"`
-	IsValidate string             `bson:"sitioWeb" json:"sitioWeb,omitempty"`
+	Role       string             `bson:"role" json:"role,omitempty"`
+	IsValidate string             `bson:"isValidate" json:"isValidate,omitempty"`
 }
