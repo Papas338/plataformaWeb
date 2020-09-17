@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/julian9809/ejemploGOWeb/models"
+	"github.com/proyLSIPAZUD/plataformaWeb/models"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -13,7 +13,7 @@ func ChequeoYaExisteUsuario(email string) (models.Usuario, bool, string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twitter")
+	db := MongoCN.Database("proyectolideres")
 	col := db.Collection("usuarios")
 
 	condicion := bson.M{"email": email}

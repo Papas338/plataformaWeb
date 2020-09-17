@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/julian9809/ejemploGOWeb/bd"
-	"github.com/julian9809/ejemploGOWeb/jwt"
-	"github.com/julian9809/ejemploGOWeb/models"
+	"github.com/proyLSIPAZUD/plataformaWeb/bd"
+	"github.com/proyLSIPAZUD/plataformaWeb/jwt"
+	"github.com/proyLSIPAZUD/plataformaWeb/models"
 )
 
 /*Login realiza el login */

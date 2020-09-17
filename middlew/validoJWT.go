@@ -3,7 +3,7 @@ package middlew
 import (
 	"net/http"
 
-	"github.com/julian9809/ejemploGOWeb/routers"
+	"github.com/proyLSIPAZUD/plataformaWeb/routers"
 )
 
 /*ValidoJWT permite validar el JWT que nos viene en la petición */

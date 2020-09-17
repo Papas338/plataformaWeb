@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/julian9809/ejemploGOWeb/bd"
+	"github.com/proyLSIPAZUD/plataformaWeb/bd"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/julian9809/ejemploGOWeb/models"
+	"github.com/proyLSIPAZUD/plataformaWeb/models"
 )
 
 /*Email valor de Email usado en todos los EndPoints */
@@ -18,7 +18,7 @@ var IDUsuario string
 
 /*ProcesoToken proceso token para extraer sus valores */
 func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
-	miClave := []byte("julian9809")
+	miClave := []byte("proyectols2020")
 	claims := &models.Claim{}
 
 	splitToken := strings.Split(tk, "Bearer")

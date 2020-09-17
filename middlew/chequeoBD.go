@@ -3,7 +3,7 @@ package middlew
 import (
 	"net/http"
 
-	"github.com/julian9809/ejemploGOWeb/bd"
+	"github.com/proyLSIPAZUD/plataformaWeb/bd"
 )
 
 /*ChequeoBD es el middlew que me permite conocer el estado de la BD */

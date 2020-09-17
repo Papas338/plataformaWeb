@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/julian9809/ejemploGOWeb/bd"
-	"github.com/julian9809/ejemploGOWeb/models"
+	"github.com/proyLSIPAZUD/plataformaWeb/bd"
+	"github.com/proyLSIPAZUD/plataformaWeb/models"
 )
 
 /*ModificarPerfil modifica el perfil de usuario */

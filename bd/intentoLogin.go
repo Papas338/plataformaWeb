@@ -1,7 +1,7 @@
 package bd
 
 import (
-	"github.com/julian9809/ejemploGOWeb/models"
+	"github.com/proyLSIPAZUD/plataformaWeb/models"
 	"golang.org/x/crypto/bcrypt"
 )
 
