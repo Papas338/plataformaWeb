@@ -47,15 +47,15 @@ function LeftComponent() {
       <div>
         <h2>
           <FontAwesomeIcon icon={faSearch} />
-          Sigue lo que te interesa
+          Sed pulvinar lectus eget
         </h2>
         <h2>
           <FontAwesomeIcon icon={faUsers} />
-          Entérate de que está hablando la gente
+          eget maximus nulla semper
         </h2>
         <h2>
           <FontAwesomeIcon icon={faComment} />
-          Únete a la conversación
+          Maecenas vel venenatis enim, quis
         </h2>
       </div>
     </Col>
@@ -68,8 +68,8 @@ function RightComponent(props) {
     <Col className="signin-signup__right" xs={6}>
       <div>
         <img src={LogoWhiteTwittor} alt="Twittor" />
-        <h2> Mira lo que está pasando en el mundo en este momento</h2>
-        <h3> Únete a Twittor hoy mismo</h3>
+        <h2> Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
+        <h3> hasellus nisl massa, varius eu justo a</h3>
         <Button
           variant="primary"
           onClick={() => openModal(<SignUpForm setShowModal={setShowModal} />)}
