@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Logo from "../../assests/png/logo_40a_orgullo.png";
 import Banner from "../../assests/jpg/banner.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -92,10 +93,10 @@ function Actions() {
   return (
     <Col className="home__actions" xs={6}>
       <div>
-        <Button>Ver Líderes</Button>
-        <Button>Cargar Líderes</Button>
-        <Button>Aprobar Usuarios (Pasantes)</Button>
-        <Button>Listado de Líderes</Button>
+        <Link>Ver Líderes</Link>
+        <Link>Cargar Líderes</Link>
+        <Link to="/aprobarUsuarios">Aprobar Usuarios (Pasantes)</Link>
+        <Link>Listado de Líderes</Link>
       </div>
     </Col>
   );

@@ -16,6 +16,9 @@ var Email string
 /*IDUsuario es el ID devuelto del modelo, que se usará en todos los EndPoints */
 var IDUsuario string
 
+/*RoleUsuario es el role del usuario usado en todos los EndPoints */
+var RoleUsuario string
+
 /*ProcesoToken proceso token para extraer sus valores */
 func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 	miClave := []byte("proyectols2020")
@@ -36,6 +39,7 @@ func ProcesoToken(tk string) (*models.Claim, bool, string, error) {
 		if encontrado == true {
 			Email = claims.Email
 			IDUsuario = claims.ID.Hex()
+			RoleUsuario = claims.Role
 		}
 		return claims, encontrado, IDUsuario, nil
 	}
