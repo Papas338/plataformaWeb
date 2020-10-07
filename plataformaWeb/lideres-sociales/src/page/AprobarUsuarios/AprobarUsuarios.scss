@@ -1,29 +1,46 @@
 @import "../../scss/index.scss";
 
 .users {
-  &__title {
+  &__header {
     padding: 15px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     h2 {
-      font-size: 22px;
+      font-size: 35px;
       margin-bottom: 0;
       font-weight: bold;
     }
+  }
+
+  &__search {
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    align-items: center;
 
     input {
-      width: 50%;
+      width: 70%;
       border-radius: 50px;
       border: 0;
       background-color: $background-dark-light;
       padding: 5px 20px;
+      margin: 5px;
       color: $font-light;
 
       &:focus {
         outline: none;
       }
+    }
+
+    a {
+      display: block;
+      width: 70%;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 10px 0;
     }
   }
 
@@ -37,5 +54,9 @@
     > div {
       margin-bottom: 10px;
     }
+  }
+
+  &__usuarios {
+    padding: 0;
   }
 }

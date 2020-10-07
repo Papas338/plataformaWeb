@@ -21,8 +21,8 @@ func VisualizarUsuarios(page int64, search string) ([]*models.Usuario, bool) {
 	var results []*models.Usuario
 
 	findOptions := options.Find()
-	findOptions.SetSkip((page - 1) * 20)
-	findOptions.SetLimit(20)
+	findOptions.SetSkip((page - 1) * 5)
+	findOptions.SetLimit(5)
 
 	query := bson.M{
 		"email": bson.M{"$regex": `(?i)` + search},

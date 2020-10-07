@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Spinner, ButtonGroup, Button } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
+import { Spinner, Container, Col, Row, Button } from "react-bootstrap";
+import { Link, withRouter } from "react-router-dom";
 import { isEmpty } from "lodash";
 import queryString from "query-string";
 import ListaUsuarios from "../../components/ListaUsuarios";
@@ -12,8 +12,6 @@ function AprobarUsuarios(props) {
   const { location } = props;
   const [users, setUsers] = useState(null);
   const params = useUsersQuery(location);
-
-  //console.log(params);
 
   useEffect(() => {
     getUsuarios(queryString.stringify(params))
@@ -30,12 +28,41 @@ function AprobarUsuarios(props) {
   }, []);
 
   return (
-    <div>
-      <div className="users__title">
-        <h2>Usuarios registrados</h2>
-        <input type="text" placeholder="Buscar usuario" />
-      </div>
+    <Container>
+      <Row>
+        <Header />
+      </Row>
+      <Row>
+        <Search />
+        <Usuarios users={users} />
+      </Row>
+    </Container>
+  );
+}
 
+function Header() {
+  return (
+    <Col className="users__header">
+      <h2>Listado de usuarios</h2>
+    </Col>
+  );
+}
+
+function Search() {
+  return (
+    <Col className="users__search" sm={4}>
+      <input type="text" placeholder="Buscar usuario" />
+      <Button as={Link} to="/">
+        Volver al inicio
+      </Button>
+    </Col>
+  );
+}
+
+function Usuarios(props) {
+  const { users } = props;
+  return (
+    <Col className="users__usuarios" sm={8}>
       {!users ? (
         <div className="users__loading">
           <Spinner animation="border" variant="info" />
@@ -44,7 +71,7 @@ function AprobarUsuarios(props) {
       ) : (
         <ListaUsuarios users={users} />
       )}
-    </div>
+    </Col>
   );
 }
 

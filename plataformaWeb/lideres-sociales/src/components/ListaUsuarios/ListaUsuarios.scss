@@ -1,4 +1,45 @@
 @import "../../scss/index.scss";
 
 .lista-usuarios {
+  margin-top: 15px;
+  padding: 15px 25px;
+  background-color: #fff;
+  border-radius: 5%;
+  border: 1px solid $primary-grey;
+
+  &__user {
+    padding: 10px 30px;
+    border-bottom: 1px solid $primary;
+
+    #usuario {
+      display: block;
+      padding: 10px 15px;
+      overflow: hidden;
+
+      h2 {
+        font-size: 20px;
+        color: $font-primary;
+      }
+
+      h3 {
+        font-size: 15px;
+        color: $font-grey;
+      }
+    }
+
+    #boton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        display: block;
+        width: 70%;
+        border-radius: 50px;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 0;
+      }
+    }
+  }
 }

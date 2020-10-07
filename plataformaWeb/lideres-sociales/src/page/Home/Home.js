@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../../assests/png/logo_40a_orgullo.png";
 import Banner from "../../assests/jpg/banner.jpg";
@@ -93,10 +93,12 @@ function Actions() {
   return (
     <Col className="home__actions" xs={6}>
       <div>
-        <Link>Ver Líderes</Link>
-        <Link>Cargar Líderes</Link>
-        <Link to="/aprobarUsuarios">Aprobar Usuarios (Pasantes)</Link>
-        <Link>Listado de Líderes</Link>
+        <Button as={Link}>Ver Líderes</Button>
+        <Button as={Link}>Cargar Líderes</Button>
+        <Button as={Link} to="/aprobarUsuarios">
+          Aprobar Usuarios (Pasantes)
+        </Button>
+        <Button as={Link}>Listado de Líderes</Button>
       </div>
     </Col>
   );
