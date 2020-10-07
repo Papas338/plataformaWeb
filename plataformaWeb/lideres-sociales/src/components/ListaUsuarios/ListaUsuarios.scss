@@ -1,5 +1,21 @@
 @import "../../scss/index.scss";
 
+.error-usuarios {
+  text-align: center;
+  padding: 100px 15px;
+
+  svg {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 200px;
+  }
+
+  h2 {
+    font-size: 35px;
+    font-weight: bold;
+  }
+}
+
 .lista-usuarios {
   margin-top: 15px;
   padding: 15px 25px;
