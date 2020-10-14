@@ -5,9 +5,9 @@ import Logo from "../../assests/png/logo_40a_orgullo.png";
 import Banner from "../../assests/jpg/banner.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { logoutApi } from "../../api/auth";
 import {
-  faGithubAlt,
-  faGoogle,
+  faSoundcloud,
   faFacebook,
   faTwitter,
   faYoutube,
@@ -15,15 +15,33 @@ import {
 
 import "./Home.scss";
 
-library.add(faGithubAlt, faGoogle, faFacebook, faTwitter, faYoutube);
+library.add(faFacebook, faTwitter, faYoutube, faSoundcloud);
 
-export default function Home() {
+export default function Home(props) {
+
+    const { setRefreshCheckLogin } = props;
+
+    const logout = () => {
+      logoutApi();
+      setRefreshCheckLogin(true);
+    }
+ 
   return (
-    <>
-      <Row>
-        <Bar />
-      </Row>
+    <>      
       <Container>
+        <Row className="home__bar">
+            <Col>
+              <div id="redes">
+                <FontAwesomeIcon icon={faFacebook} />
+                <FontAwesomeIcon icon={faTwitter} />
+                <FontAwesomeIcon icon={faYoutube} />
+                <FontAwesomeIcon icon={faSoundcloud} />
+              </div>
+              <div id="cerrar">
+                <Button as={Link} variant="danger" onClick={logout}>Cerrar Sesión</Button>
+              </div>            
+            </Col>
+        </Row>
         <Row>
           <HeaderLogo />
           <HeaderBanner />
@@ -34,18 +52,6 @@ export default function Home() {
         </Row>
       </Container>
     </>
-  );
-}
-
-function Bar() {
-  return (
-    <Col className="home__bar">
-      <div>
-        <FontAwesomeIcon icon={faFacebook} />
-        <FontAwesomeIcon icon={faTwitter} />
-        <FontAwesomeIcon icon={faYoutube} />
-      </div>
-    </Col>
   );
 }
 
@@ -93,12 +99,12 @@ function Actions() {
   return (
     <Col className="home__actions" xs={6}>
       <div>
-        <Button as={Link}>Ver Líderes</Button>
-        <Button as={Link}>Cargar Líderes</Button>
-        <Button as={Link} to="/aprobarUsuarios">
+        <Button variant="success" as={Link}>Ver Líderes</Button>
+        <Button variant="success" as={Link}>Cargar Líderes</Button>
+        <Button variant="success" as={Link} to="/aprobarUsuarios">
           Aprobar Usuarios (Pasantes)
         </Button>
-        <Button as={Link}>Listado de Líderes</Button>
+        <Button variant="success" as={Link}>Listado de Líderes</Button>
       </div>
     </Col>
   );

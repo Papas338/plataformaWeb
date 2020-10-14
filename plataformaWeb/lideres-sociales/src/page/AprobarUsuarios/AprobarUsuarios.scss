@@ -14,10 +14,30 @@
     }
   }
 
+  &__headerLogout {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: block;
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: bold;
+      color: $font-light;
+      text-align: center;
+      line-height: 10px;
+      width: 30%;
+      margin-left: auto;
+    }
+  }
+
   &__search {
     display: flex;
     flex-direction: column;
     padding: 35px;
+    text-align: center;
     align-items: center;
 
     input {
@@ -58,5 +78,20 @@
 
   &__usuarios {
     padding: 0;
+  }
+}
+
+.load-more.btn.btn-primary {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: transparent;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+    color: $primary;
   }
 }

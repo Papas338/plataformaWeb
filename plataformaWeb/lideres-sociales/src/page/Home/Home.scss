@@ -2,19 +2,33 @@
 
 .home {
   &__bar {
-    div {
-      background-color: $primary;
-      display: block;
-      width: 15%;
-      float: right;
-      border-bottom-left-radius: 60px;
-      text-align: center;
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
+    width: 20%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
 
+    #redes {
       svg {
-        margin-top: 5px;
-        margin-left: 1em;
-        margin-bottom: 5px;
+        margin: 0px 5px;
         font-size: 20px;
+        color: $font-primary;
+      }
+    }
+
+    #cerrar {
+      a {
+        display: block;
+        border-radius: 50px;
+        font-size: 10px;
+        font-weight: bold;
+        color: $font-light;
+        text-align: center;
+        line-height: 10px;
+        width: 50%;
+        margin: auto;
       }
     }
   }

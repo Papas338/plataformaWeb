@@ -73,7 +73,7 @@ export default function SignInForm(props) {
             defaultValue={formData.password}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="success" type="submit">
           {!signInLoading ? "Iniciar sesión" : <Spinner animation="border" />}
         </Button>
       </Form>

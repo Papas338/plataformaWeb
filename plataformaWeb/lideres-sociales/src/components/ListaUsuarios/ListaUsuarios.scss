@@ -18,14 +18,16 @@
 
 .lista-usuarios {
   margin-top: 15px;
+  margin-bottom: 0;
   padding: 15px 25px;
-  background-color: #fff;
-  border-radius: 5%;
-  border: 1px solid $primary-grey;
 
   &__user {
     padding: 10px 30px;
     border-bottom: 1px solid $primary;
+
+    &:hover {
+      background-color: $primary-dark-light;
+    }
 
     #usuario {
       display: block;

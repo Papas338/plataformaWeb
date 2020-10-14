@@ -33,7 +33,7 @@ export default function SignInSignUp(props) {
           />
         </Row>
       </Container>
-      <BasicModal show={showModal} setshow={setShowModal}>
+      <BasicModal show={showModal} setShow={setShowModal}>
         {contentModal}
       </BasicModal>
     </>
@@ -71,7 +71,7 @@ function RightComponent(props) {
         <h2> Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
         <h3> hasellus nisl massa, varius eu justo a</h3>
         <Button
-          variant="primary"
+          variant="success"
           onClick={() => openModal(<SignUpForm setShowModal={setShowModal} />)}
         >
           Regístrate
