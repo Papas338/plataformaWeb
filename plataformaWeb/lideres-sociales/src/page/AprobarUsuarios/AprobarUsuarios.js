@@ -22,7 +22,7 @@ function AprobarUsuarios(props) {
   useEffect(() => {
     getUsuarios(queryString.stringify(params))
       .then((response) => {
-        if (params.page == 1)  {
+        if (params.page == 1) {
           if (isEmpty(response)) {
             setUsers([]);
           } else {
@@ -35,18 +35,18 @@ function AprobarUsuarios(props) {
             setUsers([...users, ...response]);
             setBtnLoading(false);
           }
-        }        
+        }
       })
       .catch(() => {
         setUsers([]);
       });
   }, [location]);
-  
+
   const moreData = () => {
     setBtnLoading(true);
     const newPage = parseInt(params.page) + 1;
     history.push({
-      search: queryString.stringify({...params, page: newPage}),
+      search: queryString.stringify({ ...params, page: newPage }),
     });
   }
 
@@ -62,39 +62,43 @@ function AprobarUsuarios(props) {
       </Row>
       <Row>
         <Col className="users__search" sm={4}>
-            <input type="text" placeholder="Buscar usuario" 
-              onChange={(e) => history.push({
-                search: queryString.stringify({...params, search: e.target.value, page:1}) 
-              })} 
-            />            
+          <input type="text" placeholder="Buscar usuario"
+            onChange={(e) => history.push({
+              search: queryString.stringify({ ...params, search: e.target.value, page: 1 })
+            })}
+          />
           <Button variant="success" as={Link} to="/">
             Volver al inicio
           </Button>
+          <p>
+            Este módulo permite al administrador consultar todos los usuarios registrados en la plataforma, también permite convertir los usuarios a pasantes
+            o pasantes a usuarios, teniendo en cuenta que los pasantes pueden cargar información.
+          </p>          
         </Col>
         <Col className="users__usuarios" sm={8}>
-        {!users ? (
-          <div className="users__loading">
-            <Spinner animation="border" variant="info" />
+          {!users ? (
+            <div className="users__loading">
+              <Spinner animation="border" variant="info" />
             Buscando usuarios
-          </div>
-        ) : (
-          <>
-            <ListaUsuarios users={users} />
-            <Button onClick={moreData} className="load-more">
-              {!btnLoading ? (
-                btnLoading !== 0 && "Cargar más usuarios"
-              ) : (
-                <Spinner                
-                  as="span"
-                  animation="grow"
-                  size="sm"
-                  role="status"
-                  arie-hidden="true"
-                />
-              )}
-            </Button>
-          </>
-        )}
+            </div>
+          ) : (
+              <>
+                <ListaUsuarios users={users} />
+                <Button onClick={moreData} className="load-more">
+                  {!btnLoading ? (
+                    btnLoading !== 0 && "Cargar más usuarios"
+                  ) : (
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        arie-hidden="true"
+                      />
+                    )}
+                </Button>
+              </>
+            )}
         </Col>
       </Row>
     </Container>

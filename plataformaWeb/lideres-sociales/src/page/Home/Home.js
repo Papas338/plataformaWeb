@@ -19,28 +19,28 @@ library.add(faFacebook, faTwitter, faYoutube, faSoundcloud);
 
 export default function Home(props) {
 
-    const { setRefreshCheckLogin } = props;
+  const { setRefreshCheckLogin } = props;
 
-    const logout = () => {
-      logoutApi();
-      setRefreshCheckLogin(true);
-    }
- 
+  const logout = () => {
+    logoutApi();
+    setRefreshCheckLogin(true);
+  }
+
   return (
-    <>      
+    <>
       <Container>
         <Row className="home__bar">
-            <Col>
-              <div id="redes">
-                <FontAwesomeIcon icon={faFacebook} />
-                <FontAwesomeIcon icon={faTwitter} />
-                <FontAwesomeIcon icon={faYoutube} />
-                <FontAwesomeIcon icon={faSoundcloud} />
-              </div>
-              <div id="cerrar">
-                <Button as={Link} variant="danger" onClick={logout}>Cerrar Sesión</Button>
-              </div>            
-            </Col>
+          <Col>
+            <div id="redes">
+              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faYoutube} />
+              <FontAwesomeIcon icon={faSoundcloud} />
+            </div>
+            <div id="cerrar">
+              <Button as={Link} variant="danger" onClick={logout}>Cerrar Sesión</Button>
+            </div>
+          </Col>
         </Row>
         <Row>
           <HeaderLogo />
