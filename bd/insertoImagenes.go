@@ -11,7 +11,7 @@ import (
 )
 
 /*InsertoImagenes es la parada final con la BD para insertar los datos del usuario */
-func InsertoImagenes(ID string, extension string) (string, bool, error) {
+func InsertoImagenes(ID string, extension string) (string, string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -27,7 +27,7 @@ func InsertoImagenes(ID string, extension string) (string, bool, error) {
 		imagenes.Imagen1 = ID + "1." + extension
 		_, err := col.InsertOne(ctx, imagenes)
 		if err != nil {
-			return "", false, err
+			return "", "", false, err
 		}
 	} else {
 		guardados := 0
@@ -42,21 +42,21 @@ func InsertoImagenes(ID string, extension string) (string, bool, error) {
 
 				_, err := col.UpdateOne(ctx, filtro, updtString)
 				if err != nil {
-					return "", false, err
+					return "", "", false, err
 				}
 
-				return "ObjID.String()", true, nil
+				return "Imagenes cargadas", strconv.Itoa(i), true, nil
 			} else {
 				guardados++
 			}
 			if guardados == 10 {
-				return "Limite de imagenes cumplido", false, nil
+				return "Limite de imagenes cumplido", "", false, nil
 			}
 		}
 	}
 
 	//ObjID, _ := result.InsertedID.(primitive.ObjectID)
-	return "Imagenes cargadas", true, nil
+	return "Imagenes cargadas", "1", true, nil
 }
 
 func structToMap(i interface{}) (values url.Values) {
