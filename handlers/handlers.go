@@ -21,7 +21,9 @@ func Manejadores() {
 	router.HandleFunc("/listaUsuarios", middlew.ChequeoBD(middlew.ValidoJWT(routers.ListaUsuarios))).Methods("GET")
 	router.HandleFunc("/modificarUsuario", middlew.ChequeoBD(middlew.ValidoJWT(routers.ModificarUsuario))).Methods("PUT")
 
-	router.HandleFunc("/registroLider", middlew.ChequeoBD(routers.RegistroLider)).Methods("POST")
+	router.HandleFunc("/registroLider", middlew.ChequeoBD(middlew.ValidoJWT(routers.RegistroLider))).Methods("POST")
+
+	router.HandleFunc("/subirImagen", middlew.ChequeoBD(middlew.ValidoJWT(routers.SubirImagen))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

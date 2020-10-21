@@ -15,15 +15,6 @@ func ModificarUsuario(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	/* var t models.Usuario */
-
-	/* err := json.NewDecoder(r.Body).Decode(&t)
-	if err != nil {
-		http.Error(w, "Datos incorrectos"+err.Error(), 400)
-		return
-	} */
-
-	/* var status bool */
 	status, err := bd.ModificoUsuario(ID)
 	if err != nil {
 		http.Error(w, "Ocurrió un error al intentar modificar el role"+err.Error(), 400)
