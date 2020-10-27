@@ -1,6 +1,7 @@
 import Home from "../page/Home";
 import AprobarUsuarios from "../page/AprobarUsuarios";
 import Error404 from "../page/Error404";
+import RegistroLideres from "../page/RegistroLideres/RegistroLideres";
 
 export default [
   {
@@ -12,6 +13,11 @@ export default [
     path: "/aprobarUsuarios",
     exact: true,
     page: AprobarUsuarios,
+  },
+  {
+    path: "/registroLideres",
+    exact: true,
+    page: RegistroLideres,
   },
   {
     path: "*",

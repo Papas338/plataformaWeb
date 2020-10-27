@@ -20,6 +20,7 @@ library.add(faFacebook, faTwitter, faYoutube, faSoundcloud);
 export default function Home(props) {
 
   const { setRefreshCheckLogin } = props;
+  console.log(props)
 
   const logout = () => {
     logoutApi();
@@ -99,12 +100,18 @@ function Actions() {
   return (
     <Col className="home__actions" xs={6}>
       <div>
-        <Button variant="success" as={Link}>Ver Líderes</Button>
-        <Button variant="success" as={Link}>Cargar Líderes</Button>
+        <Button variant="success" as={Link}>
+          Ver Líderes
+        </Button>
+        <Button variant="success" as={Link} to="/registroLideres">
+          Registro Líderes
+        </Button>
         <Button variant="success" as={Link} to="/aprobarUsuarios">
           Aprobar Usuarios (Pasantes)
         </Button>
-        <Button variant="success" as={Link}>Listado de Líderes</Button>
+        <Button variant="success" as={Link}>
+          Listado de Líderes
+        </Button>
       </div>
     </Col>
   );
