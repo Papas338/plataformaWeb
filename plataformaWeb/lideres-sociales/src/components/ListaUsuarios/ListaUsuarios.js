@@ -3,13 +3,14 @@ import { map, isEmpty } from "lodash";
 import User from "./User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import userAuth from "../../hooks/userAuth";
 
 import "./ListaUsuarios.scss";
 
 export default function (props) {
   const { users } = props;
 
-  console.log(props)
+  const user = userAuth();
 
   if (isEmpty(users)) {
     if (users.role == "Administrador") {
@@ -19,7 +20,7 @@ export default function (props) {
           <h2>No se encuentran usuarios registrados</h2>
         </div>
       );
-    } else if ((users.role == "Usuario") || (users.role == "Pasante")) {
+    } else if ((user.role == "Usuario") || (user.role == "Pasante")) {
       return (
         <div className="error-usuarios">
           <FontAwesomeIcon icon={faExclamationTriangle} />

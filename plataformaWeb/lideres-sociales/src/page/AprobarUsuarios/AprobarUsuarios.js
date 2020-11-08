@@ -6,6 +6,7 @@ import queryString from "query-string";
 import ListaUsuarios from "../../components/ListaUsuarios";
 import { logoutApi } from "../../api/auth"
 import { getUsuarios } from "../../api/usuarios";
+import userAuth from "../../hooks/userAuth";
 import "./AprobarUsuarios.scss";
 
 function AprobarUsuarios(props) {
@@ -18,6 +19,8 @@ function AprobarUsuarios(props) {
     logoutApi();
     setRefreshCheckLogin(true);
   }
+
+  const user = userAuth();
 
   useEffect(() => {
     getUsuarios(queryString.stringify(params))
@@ -50,59 +53,71 @@ function AprobarUsuarios(props) {
     });
   }
 
-  return (
-    <Container>
-      <Row>
-        <Col className="users__header" sm={8}>
-          <h2>Listado de usuarios</h2>
-        </Col>
-        <Col className="users__headerLogout" sm={4}>
-          <Button as={Link} variant="danger" onClick={logout}>Cerrar Sesión</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="users__search" sm={4}>
-          <input type="text" placeholder="Buscar usuario"
-            onChange={(e) => history.push({
-              search: queryString.stringify({ ...params, search: e.target.value, page: 1 })
-            })}
-          />
-          <Button variant="success" as={Link} to="/">
-            Volver al inicio
-          </Button>
-          <p>
-            Este módulo permite al administrador consultar todos los usuarios registrados en la plataforma, también permite convertir los usuarios a pasantes
-            o pasantes a usuarios, teniendo en cuenta que los pasantes pueden cargar información.
-          </p>          
-        </Col>
-        <Col className="users__usuarios" sm={8}>
-          {!users ? (
-            <div className="users__loading">
-              <Spinner animation="border" variant="info" />
-            Buscando usuarios
-            </div>
-          ) : (
-              <>
-                <ListaUsuarios users={users} />
-                <Button onClick={moreData} className="load-more">
-                  {!btnLoading ? (
-                    btnLoading !== 0 && "Cargar más usuarios"
-                  ) : (
-                      <Spinner
-                        as="span"
-                        animation="grow"
-                        size="sm"
-                        role="status"
-                        arie-hidden="true"
-                      />
-                    )}
-                </Button>
-              </>
-            )}
-        </Col>
-      </Row>
-    </Container>
-  );
+  if (user.role == "Administrador") {
+    return (
+      <Container>
+        <Row>
+          <Col className="users__header" sm={8}>
+            <h2>Listado de usuarios</h2>
+          </Col>
+          <Col className="users__headerLogout" sm={4}>
+            <Button as={Link} variant="danger" onClick={logout}>Cerrar Sesión</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="users__search" sm={4}>
+            <input type="text" placeholder="Buscar usuario"
+              onChange={(e) => history.push({
+                search: queryString.stringify({ ...params, search: e.target.value, page: 1 })
+              })}
+            />
+            <Button variant="success" as={Link} to="/">
+              Volver al inicio
+            </Button>
+            <p>
+              Este módulo permite al administrador consultar todos los usuarios registrados en la plataforma, también permite convertir los usuarios a pasantes
+              o pasantes a usuarios, teniendo en cuenta que los pasantes pueden cargar información.
+            </p>          
+          </Col>
+          <Col className="users__usuarios" sm={8}>
+            {!users ? (
+              <div className="users__loading">
+                <Spinner animation="border" variant="info" />
+              Buscando usuarios
+              </div>
+            ) : (
+                <>
+                  <ListaUsuarios users={users} />
+                  <Button onClick={moreData} className="load-more">
+                    {!btnLoading ? (
+                      btnLoading !== 0 && "Cargar más usuarios"
+                    ) : (
+                        <Spinner
+                          as="span"
+                          animation="grow"
+                          size="sm"
+                          role="status"
+                          arie-hidden="true"
+                        />
+                      )}
+                  </Button>
+                </>
+              )}
+          </Col>
+        </Row>
+      </Container>
+    );
+  } else {
+    return(
+      <Container>
+        <Row>
+          <Col className="users__header" sm={8}>
+            <h2>Acceso denegado</h2>
+          </Col>
+        </Row>
+      </Container>
+    )
+  }
 }
 
 function useUsersQuery(location) {

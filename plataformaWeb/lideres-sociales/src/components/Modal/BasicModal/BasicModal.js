@@ -15,9 +15,9 @@ export default function BasicModal(props) {
       size="lg"
     >
       <Modal.Header>
-        <Modal.Title>
+        {/* <Modal.Title>
           <img src={LogoWhiteTwittor} alt="Twittor" />
-        </Modal.Title>
+        </Modal.Title> */}
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
     </Modal>

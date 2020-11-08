@@ -5,6 +5,7 @@ import Logo from "../../assests/png/logo_40a_orgullo.png";
 import Banner from "../../assests/jpg/banner.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import userAuth from "../../hooks/userAuth";
 import { logoutApi } from "../../api/auth";
 import {
   faSoundcloud,
@@ -19,8 +20,11 @@ library.add(faFacebook, faTwitter, faYoutube, faSoundcloud);
 
 export default function Home(props) {
 
+  const user = userAuth();
+
+  var userRole = user.role;
+
   const { setRefreshCheckLogin } = props;
-  console.log(props)
 
   const logout = () => {
     logoutApi();
@@ -49,7 +53,7 @@ export default function Home(props) {
         </Row>
         <Row>
           <Text />
-          <Actions />
+          <Actions role={userRole} />
         </Row>
       </Container>
     </>
@@ -96,22 +100,57 @@ function Text() {
   );
 }
 
-function Actions() {
+function Actions(userRole) {
+  
+  if (userRole.role == "Administrador") {
+    return (
+      <Col className="home__actions" xs={6}>
+        <div>
+          <Button variant="success" as={Link}>
+            Ver Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/informacionLideres">
+            Listado de Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/registroLideres">
+            Registro Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/verificacionLideres">
+            Verificar Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/aprobarUsuarios">
+            Aprobar Usuarios (Pasantes)
+          </Button>        
+        </div>
+      </Col>
+    );
+  } else if (userRole.role == "Pasante") {
+    return (
+      <Col className="home__actions" xs={6}>
+        <div>
+          <Button variant="success" as={Link}>
+            Ver Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/informacionLideres">
+            Listado de Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/registroLideres">
+            Registro Líderes
+          </Button>        
+        </div>
+      </Col>
+    );
+  } 
+
   return (
     <Col className="home__actions" xs={6}>
       <div>
         <Button variant="success" as={Link}>
           Ver Líderes
         </Button>
-        <Button variant="success" as={Link} to="/registroLideres">
-          Registro Líderes
-        </Button>
-        <Button variant="success" as={Link} to="/aprobarUsuarios">
-          Aprobar Usuarios (Pasantes)
-        </Button>
-        <Button variant="success" as={Link}>
+        <Button variant="success" as={Link} to="/informacionLideres">
           Listado de Líderes
-        </Button>
+        </Button>      
       </div>
     </Col>
   );

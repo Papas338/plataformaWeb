@@ -1,0 +1,29 @@
+@import "../../scss/index.scss";
+
+.info-lideres {
+  fieldset {
+    width: 100%;
+    border: 3px;
+    border-style: solid;
+    border-color: $primary;
+    padding: 5%;
+    margin: 10px;
+
+    div.row {
+      margin: 5px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    legend {
+      width: 20%;
+      font-size: 25px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+  }
+}

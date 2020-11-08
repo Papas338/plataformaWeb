@@ -8,7 +8,8 @@ export default function User(props) {
   const modificoUsuario = () => {
     modificarUsuario(user.id); 
     window.location.reload(); 
-  }
+  };
+  
   if (user.role != "Administrador") {
     return (
       <Row className="lista-usuarios__user">
