@@ -142,6 +142,22 @@
   }
 }
 
+.selectUbicacion {
+  color: $font-light;
+  background-color: $primary-dark-light;
+  border: 0;
+
+  option {
+    background-color: $primary-dark-light;
+    color: $primary-light;
+  }
+
+  &:focus {
+    color: $font-light;
+    background-color: $primary-dark-light;
+  }
+}
+
 .justify-content-md-center {
   button {
     .spinner-border {

@@ -30,6 +30,9 @@ func Manejadores() {
 	router.HandleFunc("/borrarLiderTemp", middlew.ChequeoBD(middlew.ValidoJWT(routers.BorrarLiderTemp))).Methods("DELETE")
 	router.HandleFunc("/listaLideres", middlew.ChequeoBD(middlew.ValidoJWT(routers.ListaLideres))).Methods("GET")
 
+	router.HandleFunc("/departamentos", middlew.ChequeoBD(middlew.ValidoJWT(routers.Departamentos))).Methods("GET")
+	router.HandleFunc("/municipios", middlew.ChequeoBD(middlew.ValidoJWT(routers.Municipios))).Methods("GET")
+
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
 		PORT = "8000"

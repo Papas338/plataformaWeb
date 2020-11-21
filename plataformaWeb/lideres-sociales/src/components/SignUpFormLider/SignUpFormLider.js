@@ -1,15 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
-import { values, size } from "lodash";
+import { map, values, size, isEmpty } from "lodash";
 import { toast } from "react-toastify";
 import { signUpLiderTemp } from "../../api/lideres";
 import { Link } from "react-router-dom";
+import { getDepartamentos, getMunicipios } from "../../api/ubicacion";
+import Select from 'react-select';
 
 import "./SignUpFormLider.scss"
 
 export default function SignUpFormLider(props) {
     const [formData, setFormData] = useState(initialFormValue());
     const [signUpLoading, setSignUpLoading] = useState(false);
+    const [departamentos, setDepartamentos] = useState(null);
+    const [municipios, setMunicipios] = useState(null);    
+
+    var envio = false;
+
+    function handleChange(e) {
+          
+            console.log("prueba")     
+            getMunicipios(e.target.value,"")
+                .then((response) => {
+                    if (isEmpty(response)) {
+                        setMunicipios([]);
+                    } else {
+                        setMunicipios(response);
+                    }
+                })
+                .catch(() => {
+                    setMunicipios([]);
+                }); 
+    }
+
+    useEffect(() => {
+        getDepartamentos("")
+            .then((response) => {
+                if (isEmpty(response)) {
+                    setDepartamentos([]);
+                } else {
+                    setDepartamentos(response);
+                }
+            })
+            .catch(() => {
+                setDepartamentos([]);
+            });        
+    }, [envio])    
+    
+    const dptos = map(departamentos, (departamento) => (
+        <option>{departamento.NOM_DPTO}</option>
+    ))
+
+    const mpios = map(municipios, (municipio) => (
+        <option>{municipio.NOM_MPIO}</option>
+    ))
 
     const onSubmit = e => {
         e.preventDefault();
@@ -77,30 +121,37 @@ export default function SignUpFormLider(props) {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        <h3>Municipio:</h3>
-                                    </Col>
-                                    <Col>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Inserte municipio"
-                                            name="municipio"
-                                            defaultValue={formData.municipio}
-                                        />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
                                         <h3>Departamento:</h3>
                                     </Col>
                                     <Col>
                                         <Form.Control
-                                            type="text"
-                                            placeholder="Inserte departamento"
+                                            as="select"
+                                            className="selectUbicacion" 
+                                            placeholder="Departamento"
                                             name="departamento"
                                             defaultValue={formData.departamento}
-                                        />
+                                            onChange={handleChange}
+                                        >
+                                            {dptos}
+                                        </Form.Control>
                                     </Col>
                                 </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Municipio:</h3>
+                                    </Col>
+                                    <Col>
+                                        <Form.Control
+                                            as="select"
+                                            className="selectUbicacion" 
+                                            placeholder="Municipio"
+                                            name="municipio"
+                                            defaultValue={formData.municipio}
+                                        >
+                                            {mpios}
+                                        </Form.Control>    
+                                    </Col>
+                                </Row>                                
                                 <Row>
                                     <Col>
                                         <h3>Tipo de liderazgo:</h3>
