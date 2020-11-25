@@ -683,7 +683,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 1"
-                                            name="linkpalabra1"
+                                            name="palabra1"
                                             defaultValue={formData.palabra1} 
                                         />
                                     </Col>
@@ -694,7 +694,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 6"
-                                            name="linkpalabra6"
+                                            name="palabra6"
                                             defaultValue={formData.palabra6} 
                                         />
                                     </Col>
@@ -707,7 +707,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 2"
-                                            name="linkpalabra2"
+                                            name="palabra2"
                                             defaultValue={formData.palabra2} 
                                         />
                                     </Col>
@@ -718,7 +718,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 7"
-                                            name="linkpalabra7"
+                                            name="palabra7"
                                             defaultValue={formData.palabra7} 
                                         />
                                     </Col>
@@ -731,7 +731,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 3"
-                                            name="linkpalabra3"
+                                            name="palabra3"
                                             defaultValue={formData.palabra3} 
                                         />
                                     </Col>
@@ -742,7 +742,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 8"
-                                            name="linkpalabra8"
+                                            name="palabra8"
                                             defaultValue={formData.palabra8} 
                                         />
                                     </Col>
@@ -755,7 +755,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 4"
-                                            name="linkpalabra4"
+                                            name="palabra4"
                                             defaultValue={formData.palabra4} 
                                         />
                                     </Col>
@@ -766,7 +766,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 9"
-                                            name="linkpalabra9"
+                                            name="palabra9"
                                             defaultValue={formData.palabra9} 
                                         />
                                     </Col>
@@ -779,7 +779,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 5"
-                                            name="linkpalabra5"
+                                            name="palabra5"
                                             defaultValue={formData.palabra5} 
                                         />
                                     </Col>
@@ -790,7 +790,7 @@ export default function SignUpFormLider(props) {
                                         <Form.Control
                                             type="text"
                                             placeholder="Inserte palabra 10"
-                                            name="linkpalabra10"
+                                            name="palabra10"
                                             defaultValue={formData.palabra10} 
                                         />
                                     </Col>

@@ -106,7 +106,7 @@ function Actions(userRole) {
     return (
       <Col className="home__actions" xs={6}>
         <div>
-          <Button variant="success" as={Link}>
+          <Button variant="success" as={Link} to="/visualizarLideres">
             Ver Líderes
           </Button>
           <Button variant="success" as={Link} to="/informacionLideres">

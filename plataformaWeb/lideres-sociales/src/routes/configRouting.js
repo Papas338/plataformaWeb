@@ -4,6 +4,7 @@ import Error404 from "../page/Error404";
 import RegistroLideres from "../page/RegistroLideres/RegistroLideres";
 import InformacionLideres from "../page/InformacionLideres/InformacionLideres";
 import VerificarLideres from "../page/VerificarLideres/VerificarLideres";
+import VisualizarLideres from "../page/VisualizarLideres/VisualizarLideres";
 
 export default [
   {
@@ -30,6 +31,11 @@ export default [
     path: "/verificacionLideres",
     exact: true,
     page: VerificarLideres,
+  },
+  {
+    path: "/visualizarLideres",
+    exact: true,
+    page: VisualizarLideres,
   },
   {
     path: "*",

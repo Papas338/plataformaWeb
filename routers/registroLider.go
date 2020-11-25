@@ -2,6 +2,7 @@ package routers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
@@ -13,6 +14,10 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	var t models.LiderGeneral
 	decodificar := json.NewDecoder(r.Body)
 	err := decodificar.Decode(&t)
+
+	fmt.Println("antes de registro esri")
+	RegistroEsri(t)
+
 	if err != nil {
 		http.Error(w, "Error en los datos recibidos "+err.Error(), 400)
 		return

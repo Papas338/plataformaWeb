@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Row, Col, Button, Spinner, Form } from "react-bootstrap";
-import { signUpLider, deleteLiderTemp } from "../../api/lideres";
+import { signUpLider, signUpLiderEsri, deleteLiderTemp } from "../../api/lideres";
 import { toast } from "react-toastify";
 import InfoLideresTemp from "../../components/InfoLideresTemp/InfoLideresTemp";
 
@@ -35,8 +35,7 @@ export default function LiderTemp(props) {
                 toast.error("Error del servidor, inténtelo más tarde!");
             }).finally(() => {
                 setSignUpLoading(false);
-            })
-                
+            })                
     };
 
   /* const modificoUsuario = () => {

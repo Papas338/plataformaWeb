@@ -12,6 +12,6 @@ type Municipio struct {
 	CodMunicipio    int                `bson:"COD_MPIO" json:"COD_MPIO"`
 	NomMunicipio    string             `bson:"NOM_MPIO" json:"NOM_MPIO,omitempty"`
 	Tipo            string             `bson:"TIPO" json:"TIPO,omiempty"`
-	X               string             `bson:"X" json:"X,omitempty"`
-	Y               string             `bson:"Y" json:"Y,omitempty"`
+	X               float64            `bson:"X" json:"X,omitempty"`
+	Y               float64            `bson:"Y" json:"Y,omitempty"`
 }
