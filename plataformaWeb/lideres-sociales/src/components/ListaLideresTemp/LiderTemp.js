@@ -3,6 +3,7 @@ import { Row, Col, Button, Spinner, Form } from "react-bootstrap";
 import { signUpLider, signUpLiderEsri, deleteLiderTemp } from "../../api/lideres";
 import { toast } from "react-toastify";
 import InfoLideresTemp from "../../components/InfoLideresTemp/InfoLideresTemp";
+import CargarImagenes from "../../components/CargaImagenes/CargaImagenes";
 
 export default function LiderTemp(props) {
   const { openModal, setShowModal, lider } = props;
@@ -44,7 +45,7 @@ export default function LiderTemp(props) {
   } */
     return (
       <Row className="lista-lideresTemp__user">
-        <Col id="usuario" sm={8}>
+        <Col id="usuario" sm={6}>
             <h2>{lider.nombre}</h2>
             <h3>{lider.departamento} - {lider.municipio} - {lider.territorio}</h3>
         </Col>
@@ -54,6 +55,14 @@ export default function LiderTemp(props) {
               InfoLideresTemp lider={lider} setShowModal={setShowModal}/>)
             }>
             Ver información
+          </Button>
+        </Col>
+        <Col id="boton" sm={2}>
+          <Button variant="warning" 
+            onClick={() => openModal(<
+              CargarImagenes lider={lider} setShowModal={setShowModal}/>)
+            }>
+            Cargar imagenes
           </Button>
         </Col>
         <Col id="boton" sm={2}>

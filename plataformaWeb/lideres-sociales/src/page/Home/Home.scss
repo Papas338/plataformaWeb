@@ -68,6 +68,12 @@
   &__text {
     p {
       margin-top: 5em;
+      margin-bottom: 0;
+      text-align: justify;
+    }
+
+    #parrafo {
+      margin-top: 10px;
     }
   }
 

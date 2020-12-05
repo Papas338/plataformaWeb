@@ -142,6 +142,31 @@
   }
 }
 
+.imagen {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $background-dark-light;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: -20px !important;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  svg {
+    width: 30px;
+    fill: $font-light;
+
+    &:hover {
+      fill: $font-dark;
+    }
+  }
+}
+
 .selectUbicacion {
   color: $font-light;
   background-color: $primary-dark-light;

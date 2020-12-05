@@ -84,17 +84,10 @@ function Text() {
   return (
     <Col className="home__text" xs={6}>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sodales
-        elit eget nibh pellentesque, et porta sapien maximus. Proin interdum
-        dolor eget velit volutpat accumsan. Aenean blandit facilisis mi eget
-        congue. Integer ipsum orci, pellentesque id augue eget, faucibus cursus
-        odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-        posuere cubilia curae; Donec at velit blandit, semper ipsum quis,
-        vestibulum mauris. Integer sed varius velit. Proin eu lorem tellus.
-        Curabitur tincidunt, tellus eu tempus tincidunt, risus mi lacinia nulla,
-        non fringilla purus neque at metus. Praesent semper pretium ligula, sit
-        amet mollis velit imperdiet ut. Suspendisse sagittis sapien eget sapien
-        viverra, quis consequat neque viverra.
+        Los líderes indígenas realizan más actividades que no necesariamente están relacionadas con lo que compete a los asuntos indígenas. Los líderes también trabajan temas relacionados con construcción y mejoramiento de vías, cultivos, entre otros. Es importante entender que un líder trabaja desde diferentes frentes, sin importar que se catalogue desde uno solo. 
+      </p>
+      <p id="parrafo">
+        Es importante la labor que ejerce un líder social indígena sobre su territorio, sobre recuperar la tierra que han perdido, denunciar actos delictivos, además de conservar la memoria histórica de sus ancestros, y la muerte de estos genera un impacto directo en los derechos humanos y en la protección de los mismos, en las causas que protegían, en su forma de transmitir la cultura, en las colectivos, organizaciones y comunidades que representaban, aumentando así la percepción de vulnerabilidad, y de indefensión de los derechos humanos.
       </p>
     </Col>
   );

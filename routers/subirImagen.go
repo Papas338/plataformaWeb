@@ -12,14 +12,10 @@ import (
 /*SubirImagen sube la imagen al servidor */
 func SubirImagen(w http.ResponseWriter, r *http.Request) {
 
-	ID := r.URL.Query().Get("id")
-	if len(ID) < 1 {
-		http.Error(w, "Debe enviar el parametro id", http.StatusBadRequest)
-		return
-	}
-
 	file, handler, err := r.FormFile("imagen")
 	var extension = strings.Split(handler.Filename, ".")[1]
+
+	ID := "prueba"
 
 	mensaje, indicador, status, err := bd.InsertoImagenes(ID, extension)
 	if err != nil {

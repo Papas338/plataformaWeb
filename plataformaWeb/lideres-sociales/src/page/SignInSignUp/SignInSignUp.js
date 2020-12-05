@@ -3,14 +3,18 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
-  faUsers,
   faComment,
+  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import SignInForm from "../../components/SignInForm/SignInForm";
-import LogoWhiteTwittor from "../../assests/png/logo-white.png";
+import LogoWhite from "../../assests/png/paz.png";
 import LogoTwittor from "../../assests/png/logo.png";
+import Union from "../../assests/jpg/union.jpg";
+import Ipazud from "../../assests/jpg/ipazud.jpg";
+import Proximax from "../../assests/png/proximax.png";
+import Logo from "../../assests/png/logo_40a_orgullo.png"
 import "./SignInSignUp.scss";
 
 export default function SignInSignUp(props) {
@@ -42,23 +46,33 @@ export default function SignInSignUp(props) {
 
 function LeftComponent() {
   return (
+    <>
     <Col className="signin-signup__left" xs={6}>
-      <img src={LogoTwittor} alt="Twittor" />
       <div>
-        <h2>
+        <img src={Union} alt="Union" />
+        <img src={LogoTwittor} alt="LogoTwittor" />
+        <img src={Ipazud} alt="Ipazud" />
+        <img src={Logo} alt="Logo" />
+        <h5>
           <FontAwesomeIcon icon={faSearch} />
-          Sed pulvinar lectus eget
-        </h2>
-        <h2>
-          <FontAwesomeIcon icon={faUsers} />
-          eget maximus nulla semper
-        </h2>
-        <h2>
+          Busca, consulta y descarga la información de los líderes sociales para recuperar y humanizar su memoria histórica.
+        </h5>
+        <h5>
+          <FontAwesomeIcon icon={faLock} />
+          La información de los líderes se encuentra respaldada gracias a la tecnología blockchain.
+        </h5>
+        <h5>
           <FontAwesomeIcon icon={faComment} />
-          Maecenas vel venenatis enim, quis
-        </h2>
-      </div>
+          Habla y comparte la memoria de nuestros indígenas, no dejes que su legado se pierda en el tiempo.
+        </h5>
+      </div>      
     </Col>
+    <Row>
+      <Col id="proximax">
+        <img src={Proximax} alt="Proximax" />  
+      </Col>
+    </Row>
+    </>
   );
 }
 
@@ -67,9 +81,8 @@ function RightComponent(props) {
   return (
     <Col className="signin-signup__right" xs={6}>
       <div>
-        <img src={LogoWhiteTwittor} alt="Twittor" />
-        <h2> Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-        <h3> hasellus nisl massa, varius eu justo a</h3>
+        <img src={LogoWhite} alt="LogoWhite" />
+        <h2> Explora desde el mapa de Colombia todos los líderes que quieras consultar</h2>
         <Button
           variant="success"
           onClick={() => openModal(<SignUpForm setShowModal={setShowModal} />)}

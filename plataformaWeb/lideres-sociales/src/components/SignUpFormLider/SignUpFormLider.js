@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import { map, values, size, isEmpty } from "lodash";
 import { toast } from "react-toastify";
-import { signUpLiderTemp } from "../../api/lideres";
+import { signUpLiderTemp, subirImagen } from "../../api/lideres";
 import { Link } from "react-router-dom";
 import { getDepartamentos, getMunicipios } from "../../api/ubicacion";
-import Select from 'react-select';
 
 import "./SignUpFormLider.scss"
 
@@ -13,8 +12,8 @@ export default function SignUpFormLider(props) {
     const [formData, setFormData] = useState(initialFormValue());
     const [signUpLoading, setSignUpLoading] = useState(false);
     const [departamentos, setDepartamentos] = useState(null);
-    const [municipios, setMunicipios] = useState(null);    
-
+    const [municipios, setMunicipios] = useState(null); 
+    const [validated, setValidated] = useState(false);
     var envio = false;
 
     function handleChange(e) {
@@ -56,16 +55,14 @@ export default function SignUpFormLider(props) {
     ))
 
     const onSubmit = e => {
-        e.preventDefault();
-        /* let validCount = 0;
-        values(formData).some(value => {
-            value && validCount++
-            return null
-        });
+        e.preventDefault();       
 
-        if(validCount !== size(formData)) {
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
             toast.warning("Completa todo los campos del formulario");
-        } else { */
+        } else {
             setSignUpLoading(true);
             signUpLiderTemp(formData).then(response => {
                 if(response.code) {
@@ -78,8 +75,11 @@ export default function SignUpFormLider(props) {
                 toast.error("Error del servidor, inténtelo más tarde!");
             }).finally(() => {
                 setSignUpLoading(false);
-            })
-                
+            }) 
+        }
+
+        setValidated(true);
+
     };
 
     const onChange = e => {
@@ -88,7 +88,7 @@ export default function SignUpFormLider(props) {
 
     return (
         <Container fluid="md">
-            <Form onSubmit={onSubmit} onChange={onChange}>
+            <Form noValidate validated={validated} onSubmit={onSubmit} onChange={onChange}>
                 <Form.Group>
                     <Row>
                         <Col sm={6}>
@@ -104,6 +104,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Inserte nombre"
                                             name="nombre"
                                             defaultValue={formData.nombre}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -116,6 +117,7 @@ export default function SignUpFormLider(props) {
                                             type="date"
                                             name="fecha"
                                             defaultValue={formData.fecha}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -131,6 +133,7 @@ export default function SignUpFormLider(props) {
                                             name="departamento"
                                             defaultValue={formData.departamento}
                                             onChange={handleChange}
+                                            required
                                         >
                                             {dptos}
                                         </Form.Control>
@@ -147,6 +150,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Municipio"
                                             name="municipio"
                                             defaultValue={formData.municipio}
+                                            required
                                         >
                                             {mpios}
                                         </Form.Control>    
@@ -162,6 +166,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Inserte tipo de liderazgo"
                                             name="tipoLiderazgo"
                                             defaultValue={formData.tipoLiderazgo}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -175,6 +180,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Inserte territorio"
                                             name="territorio"
                                             defaultValue={formData.territorio}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -192,6 +198,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Inserte detalle de labor/relación"
                                             name="detalleRelacionLabor"
                                             defaultValue={formData.detalleRelacionLabor}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -204,6 +211,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Inserte descripción de labor/relación"
                                             name="descripcionRelacionLabor"
                                             defaultValue={formData.descripcionRelacionLabor}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -396,7 +404,7 @@ export default function SignUpFormLider(props) {
                                             as="textarea"
                                             rows={2}
                                             placeholder="Inserte detalle de reparación"
-                                            name="detallePrensa"
+                                            name="detalleReparacion"
                                             defaultValue={formData.detalleReparacion}
                                         />
                                     </Col>
@@ -408,7 +416,7 @@ export default function SignUpFormLider(props) {
                                             as="textarea"
                                             rows={2}
                                             placeholder="Inserte descripción de medidas"
-                                            name="descripcionPrensa1"
+                                            name="descripcionMedidas1"
                                             defaultValue={formData.descripcionMedidas1}
                                         />
                                     </Col>
@@ -420,7 +428,7 @@ export default function SignUpFormLider(props) {
                                             as="textarea"
                                             rows={2}
                                             placeholder="Inserte descripción de medidas"
-                                            name="descripcionPrensa2"
+                                            name="descripcionMedidas2"
                                             defaultValue={formData.descripcionMedidas2}
                                         />
                                     </Col>
@@ -432,7 +440,7 @@ export default function SignUpFormLider(props) {
                                             as="textarea"
                                             rows={2}
                                             placeholder="Inserte descripción de medidas"
-                                            name="descripcionPrensa3"
+                                            name="descripcionMedidas3"
                                             defaultValue={formData.descripcionMedidas3}
                                         />
                                     </Col>
@@ -444,7 +452,7 @@ export default function SignUpFormLider(props) {
                                             as="textarea"
                                             rows={2}
                                             placeholder="Inserte descripción de medidas"
-                                            name="descripcionPrensa4"
+                                            name="descripcionMedidas4"
                                             defaultValue={formData.descripcionMedidas4}
                                         />
                                     </Col>
@@ -456,7 +464,7 @@ export default function SignUpFormLider(props) {
                                             as="textarea"
                                             rows={2}
                                             placeholder="Inserte descripción de medidas"
-                                            name="descripcionPrensa5"
+                                            name="descripcionMEdidas5"
                                             defaultValue={formData.descripcionMedidas5}
                                         />
                                     </Col>
@@ -468,7 +476,7 @@ export default function SignUpFormLider(props) {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Inserte Link 1"
-                                                name="linkPrensa1"
+                                                name="linkMedidas1"
                                                 defaultValue={formData.linkMedidas1} 
                                             />
                                         </Form.Group>
@@ -477,7 +485,7 @@ export default function SignUpFormLider(props) {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Inserte Link 2"
-                                                name="linkPrensa2"
+                                                name="linkMedidas2"
                                                 defaultValue={formData.linkMedidas2} 
                                             />
                                         </Form.Group>
@@ -486,7 +494,7 @@ export default function SignUpFormLider(props) {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Inserte Link 3"
-                                                name="linkPrensa3"
+                                                name="linkMedidas3"
                                                 defaultValue={formData.linkMedidas3} 
                                             />
                                         </Form.Group>
@@ -495,7 +503,7 @@ export default function SignUpFormLider(props) {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Inserte Link 4"
-                                                name="linkPrensa4"
+                                                name="linkMedidas4"
                                                 defaultValue={formData.linkMedidas4} 
                                             />
                                         </Form.Group>
@@ -504,7 +512,7 @@ export default function SignUpFormLider(props) {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Inserte Link 5"
-                                                name="linkPrensa5"
+                                                name="linkMedidas5"
                                                 defaultValue={formData.linkMedidas5} 
                                             />
                                         </Form.Group>
@@ -685,6 +693,7 @@ export default function SignUpFormLider(props) {
                                             placeholder="Inserte palabra 1"
                                             name="palabra1"
                                             defaultValue={formData.palabra1} 
+                                            required
                                         />
                                     </Col>
                                     <Col md={3}>

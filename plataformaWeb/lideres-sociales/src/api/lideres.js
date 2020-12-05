@@ -97,8 +97,6 @@ export function signUpLiderTemp(lider) {
   }
 
   export function deleteLiderTemp(paramsUrl) {
-    console.log("entra a la funcion")
-    console.log(paramsUrl)
     const url = `${API_HOST}/borrarLiderTemp?id=${paramsUrl}`;
     const params = {
       method: "DELETE",
@@ -118,4 +116,30 @@ export function signUpLiderTemp(lider) {
     }).catch(err => {
       return err;
     })
+  }
+
+  export function subirImagen(file) {
+    const url = `${API_HOST}/subirImagen`;
+
+    const formdata = new FormData();
+    formdata.append("imagen", file);
+
+    const params = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getTokenApi()}`
+      },
+      body: formdata
+    };
+
+    return fetch(url, params)
+      .then(response => {
+        return response.text();
+      })
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        return err;        
+      })
   }
