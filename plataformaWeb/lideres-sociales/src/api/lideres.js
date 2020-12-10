@@ -28,7 +28,8 @@ export function signUpLiderTemp(lider) {
   }
 
   export function signUpLider(lider) {
-    console.log(lider);
+    lider.usuarioId = lider.id;
+
     const url = `${API_HOST}/registroLider`;
     const params = {
       method: "POST",
@@ -142,4 +143,50 @@ export function signUpLiderTemp(lider) {
       .catch(err => {
         return err;        
       })
+  }
+
+  export function registroImagen(ID) {
+  
+    const url = `${API_HOST}/modificarImagenes?id=${ID}`;
+  
+    const params = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${getTokenApi()}`,
+      },
+    };
+  
+    return fetch(url, params)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        return result;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  export function getImagenes(Id) {
+    const url = `${API_HOST}/obtenerImagenes?id=${Id}`;
+  
+    const params = {
+      headers: {
+        Authorization: `Bearer ${getTokenApi()}`,
+      },
+    };
+
+    console.log(url)
+  
+    return fetch(url, params)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        return result;
+      })
+      .catch((err) => {
+        return err;
+      });
   }

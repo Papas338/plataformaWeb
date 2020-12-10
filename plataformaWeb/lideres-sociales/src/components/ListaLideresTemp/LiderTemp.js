@@ -1,13 +1,35 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Row, Col, Button, Spinner, Form } from "react-bootstrap";
 import { signUpLider, signUpLiderEsri, deleteLiderTemp } from "../../api/lideres";
 import { toast } from "react-toastify";
+import { isEmpty } from "lodash";
 import InfoLideresTemp from "../../components/InfoLideresTemp/InfoLideresTemp";
 import CargarImagenes from "../../components/CargaImagenes/CargaImagenes";
+import { getImagenes } from "../../api/lideres";
 
 export default function LiderTemp(props) {
   const { openModal, setShowModal, lider } = props;
   const [signUpLoading, setSignUpLoading] = useState(false);
+  const [imagenes, setImagenes] = useState(null);
+
+  var cargaImagen = 0;
+
+    console.log(lider.id)
+
+    useEffect(() => {
+      getImagenes(lider.id).then((response) => {
+          if(isEmpty(response)) {
+              setImagenes([]);            
+          } else {
+              setImagenes(response);
+          }
+      }).catch(() => {
+          setImagenes([]);
+        });
+      console.log("effect")
+      cargaImagen++;
+    }, [cargaImagen])        
+     
 
   const eliminarLiderTemp = () => {
     deleteLiderTemp(lider.id); 
@@ -52,7 +74,7 @@ export default function LiderTemp(props) {
         <Col id="boton" sm={2}>
           <Button variant="info" 
             onClick={() => openModal(<
-              InfoLideresTemp lider={lider} setShowModal={setShowModal}/>)
+              InfoLideresTemp imagenes={imagenes} lider={lider} setShowModal={setShowModal}/>)
             }>
             Ver información
           </Button>

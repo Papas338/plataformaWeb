@@ -26,6 +26,7 @@ func Manejadores() {
 
 	router.HandleFunc("/subirImagen", middlew.ChequeoBD(middlew.ValidoJWT(routers.SubirImagen))).Methods("POST")
 	router.HandleFunc("/modificarImagenes", middlew.ChequeoBD(middlew.ValidoJWT(routers.ManejoImagenes))).Methods("PUT")
+	router.HandleFunc("/obtenerImagenes", middlew.ChequeoBD(middlew.ValidoJWT(routers.ObtenerImagenes))).Methods("GET")
 
 	router.HandleFunc("/listaLideresVerificar", middlew.ChequeoBD(middlew.ValidoJWT(routers.ListaLideresTemp))).Methods("GET")
 	router.HandleFunc("/borrarLiderTemp", middlew.ChequeoBD(middlew.ValidoJWT(routers.BorrarLiderTemp))).Methods("DELETE")

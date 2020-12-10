@@ -86,7 +86,7 @@ function InformacionLideres(props) {
             {!lideres ? (
               <div className="users__loading">
                 <Spinner animation="border" variant="info" />
-              Buscando lideres
+                Buscando lideres
               </div>
             ) : (
                 <>

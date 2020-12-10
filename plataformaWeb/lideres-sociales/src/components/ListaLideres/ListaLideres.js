@@ -7,7 +7,7 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import "./ListaLideres.scss";
 
 export default function (props) {
-  const { openModal, setShowModal, lideres } = props;
+  const { openModal, setShowModal, lideres } = props;  
 
   console.log(props)
 

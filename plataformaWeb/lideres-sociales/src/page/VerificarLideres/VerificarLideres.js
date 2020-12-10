@@ -79,7 +79,10 @@ function VerificarLideres(props) {
               Volver al inicio
             </Button>
             <p>
-              Este módulo permite verificar la información de los lideres indigenas asesinados cargada por lo.
+              Este módulo permite verificar la información de los líderes indígenas asesinados cargada por los pasantes.
+            </p>
+            <p>
+            En la ventana de cargar imágenes cargar únicamente archivos jpg y entre carga de imágenes esperar de dos a tres minutos.
             </p>          
           </Col>
           <Col className="users__usuarios" sm={8}>

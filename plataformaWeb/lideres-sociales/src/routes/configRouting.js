@@ -5,6 +5,7 @@ import RegistroLideres from "../page/RegistroLideres/RegistroLideres";
 import InformacionLideres from "../page/InformacionLideres/InformacionLideres";
 import VerificarLideres from "../page/VerificarLideres/VerificarLideres";
 import VisualizarLideres from "../page/VisualizarLideres/VisualizarLideres";
+import Investigacion from "../page/Investigacion/Investigacion";
 
 export default [
   {
@@ -36,6 +37,11 @@ export default [
     path: "/visualizarLideres",
     exact: true,
     page: VisualizarLideres,
+  },
+  {
+    path: "/investigacion",
+    exact: true,
+    page: Investigacion,
   },
   {
     path: "*",

@@ -1,9 +1,9 @@
 package routers
 
 import (
+	"fmt"
 	"net/http"
-	"os"
-	"strconv"
+	"time"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
 )
@@ -17,7 +17,10 @@ func ManejoImagenes(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	status, err := bd.ModificarImagenes(ID, "usuarioId")
+	time.Sleep(120 * time.Second)
+	fmt.Println("sleep terminado")
+
+	estado, status, err := bd.ModificarImagenes(ID)
 	if err != nil {
 		http.Error(w, "Ocurrió un error al intentar modificar el registro"+err.Error(), 400)
 		return
@@ -28,15 +31,19 @@ func ManejoImagenes(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for i := 1; i <= 10; i++ {
+	fmt.Println(estado)
+
+	/* for i := 1; i <= 10; i++ {
 		j := strconv.Itoa(i)
 		OriginalPath := "uploads/lideres/prueba" + j + ".jpg"
 		NewPath := "uploads/lideres/" + ID + j + ".jpg"
 		e := os.Rename(OriginalPath, NewPath)
 		if e == nil {
 			bd.ModificarImagenes(ID, j)
+		} else {
+			fmt.Println("No encontro imagen " + j)
 		}
-	}
+	} */
 
 	w.WriteHeader(http.StatusCreated)
 }

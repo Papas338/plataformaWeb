@@ -2,8 +2,6 @@ package bd
 
 import (
 	"context"
-	"net/url"
-	"reflect"
 	"strconv"
 	"time"
 
@@ -30,6 +28,7 @@ func InsertoImagenes(ID string, extension string) (string, string, bool, error) 
 			return "", "", false, err
 		}
 	} else {
+
 		guardados := 0
 		for i := 1; i <= 10; i++ {
 			if obtener["Imagen"+strconv.Itoa(i)][0] == "" {
@@ -59,7 +58,7 @@ func InsertoImagenes(ID string, extension string) (string, string, bool, error) 
 	return "Imagenes cargadas", "1", true, nil
 }
 
-func structToMap(i interface{}) (values url.Values) {
+/* func structToMap(i interface{}) (values url.Values) {
 	values = url.Values{}
 	iVal := reflect.ValueOf(i).Elem()
 	typ := iVal.Type()
@@ -86,4 +85,4 @@ func structToMap(i interface{}) (values url.Values) {
 		values.Set(typ.Field(i).Name, v)
 	}
 	return
-}
+} */

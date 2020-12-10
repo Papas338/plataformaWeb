@@ -113,6 +113,9 @@ function Actions(userRole) {
           </Button>
           <Button variant="success" as={Link} to="/aprobarUsuarios">
             Aprobar Usuarios (Pasantes)
+          </Button>
+          <Button variant="success" as={Link} to="/investigacion">
+            Acerca de la investigación
           </Button>        
         </div>
       </Col>
@@ -121,7 +124,7 @@ function Actions(userRole) {
     return (
       <Col className="home__actions" xs={6}>
         <div>
-          <Button variant="success" as={Link}>
+          <Button variant="success" as={Link} to="/visualizarLideres">
             Ver Líderes
           </Button>
           <Button variant="success" as={Link} to="/informacionLideres">
@@ -129,6 +132,9 @@ function Actions(userRole) {
           </Button>
           <Button variant="success" as={Link} to="/registroLideres">
             Registro Líderes
+          </Button>
+          <Button variant="success" as={Link} to="/investigacion">
+            Acerca de la investigación
           </Button>        
         </div>
       </Col>
@@ -138,11 +144,14 @@ function Actions(userRole) {
   return (
     <Col className="home__actions" xs={6}>
       <div>
-        <Button variant="success" as={Link}>
+        <Button variant="success" as={Link} to="/visualizarLideres">
           Ver Líderes
         </Button>
         <Button variant="success" as={Link} to="/informacionLideres">
           Listado de Líderes
+        </Button>
+        <Button variant="success" as={Link} to="/investigacion">
+            Acerca de la investigación
         </Button>      
       </div>
     </Col>

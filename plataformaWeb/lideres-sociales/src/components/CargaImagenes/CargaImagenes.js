@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from "react-toastify";
-import { subirImagen } from "../../api/lideres";
+import { subirImagen, registroImagen } from "../../api/lideres";
 import { Form, Col, Row, Button, Spinner, Container } from 'react-bootstrap';
 import { useDropzone } from "react-dropzone";
 import { Camera } from "../../utils/icons";
@@ -30,10 +30,15 @@ export default function CargaImagenes(props) {
         e.preventDefault();
 
         if(imageFile) {
-            console.log("prueba")
-            subirImagen(imageFile).catch(() => {
+            subirImagen(imageFile)
+            .then(() => {
+                registroImagen(lider.id).catch(() => {
+                    toast.error("Error al subir la imagen");
+                });
+            })
+            .catch(() => {
                 toast.error("Error al subir la imagen");
-            });
+            });            
             toast.success("Imagen cargada");
             setSignUpLoading(true);
             setShowModal(false);

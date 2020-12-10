@@ -23,7 +23,7 @@ func ListaLideres(w http.ResponseWriter, r *http.Request) {
 
 	pag := int64(pagTemp)
 
-	var result []*models.LiderResumen
+	var result []*models.Lider
 	var status bool
 
 	result, status = bd.VisualizarLiderResumen(pag, search)

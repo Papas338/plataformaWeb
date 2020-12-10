@@ -11,14 +11,14 @@ import (
 )
 
 /*VisualizarLiderResumen lee los lideres en el sistema */
-func VisualizarLiderResumen(page int64, search string) ([]*models.LiderResumen, bool) {
+func VisualizarLiderResumen(page int64, search string) ([]*models.Lider, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
 	db := MongoCN.Database("proyectolideres")
-	col := db.Collection("liderResumen")
+	col := db.Collection("lider")
 
-	var results []*models.LiderResumen
+	var results []*models.Lider
 
 	findOptions := options.Find()
 	findOptions.SetSkip((page - 1) * 5)
@@ -35,7 +35,7 @@ func VisualizarLiderResumen(page int64, search string) ([]*models.LiderResumen, 
 	}
 
 	for cur.Next(ctx) {
-		var s models.LiderResumen
+		var s models.Lider
 		err := cur.Decode(&s)
 		if err != nil {
 			fmt.Println(err.Error())

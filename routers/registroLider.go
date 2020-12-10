@@ -2,7 +2,6 @@ package routers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
@@ -15,7 +14,6 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	decodificar := json.NewDecoder(r.Body)
 	err := decodificar.Decode(&t)
 
-	fmt.Println("antes de registro esri")
 	RegistroEsri(t)
 
 	if err != nil {
@@ -31,7 +29,7 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	var status bool
 	var idUsuario string
 
-	idUsuario, status, err = bd.InsertoLiderResumen(t)
+	idUsuario, status, err = bd.InsertoLiderVerificado(t)
 	t.UsuarioID = idUsuario[10 : len(idUsuario)-2]
 	if err != nil {
 		http.Error(w, "Ocurrió un error al intentar realizar el registro del lider resumen "+err.Error(), 400)
@@ -43,7 +41,7 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, status, err = bd.InsertoLabor(t)
+	/* _, status, err = bd.InsertoLabor(t)
 	if err != nil {
 		http.Error(w, "Ocurrió un error al intentar realizar el registro del lider labor "+err.Error(), 400)
 		return
@@ -107,7 +105,7 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	if status == false {
 		http.Error(w, "No se ha logrado insertar el registro del lider palabras claves ", 400)
 		return
-	}
+	} */
 
 	w.WriteHeader(http.StatusCreated)
 }

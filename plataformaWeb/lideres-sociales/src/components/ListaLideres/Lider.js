@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import InfoLideres from "../../components/InfoLideres/InfoLideres";
+import { getImagenes } from "../../api/lideres";
+import { isEmpty } from "lodash";
 
 export default function Lider(props) {
   const { openModal, setShowModal, lider } = props;
-  console.log(lider);
+  
+  const [imagenes, setImagenes] = useState(null);
+
+  var cargaImagen = 0;
+
+    console.log(lider.id)
+
+    useEffect(() => {
+      getImagenes(lider.id).then((response) => {
+          if(isEmpty(response)) {
+              setImagenes([]);            
+          } else {
+              setImagenes(response);
+          }
+      }).catch(() => {
+          setImagenes([]);
+        });
+      console.log("effect")
+      cargaImagen++;
+    }, [cargaImagen])
 
     return (
       <Row className="lista-usuarios__user">
@@ -15,7 +36,7 @@ export default function Lider(props) {
         <Col id="boton" sm={4}>
           <Button variant="success" 
             onClick={() => openModal(<
-              InfoLideres lider={lider} setShowModal={setShowModal}/>)
+              InfoLideres imagenes={imagenes} lider={lider} setShowModal={setShowModal}/>)
             }>
             Ver información
           </Button>

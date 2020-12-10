@@ -1,12 +1,16 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button} from "react-bootstrap";
-import { signUpLider, deleteLiderTemp } from "../../api/lideres";
+import { signUpLider, deleteLiderTemp, getLideres } from "../../api/lideres";
 import { toast } from "react-toastify";
 import "./InfoLideresTemp.scss";
+import { Camera } from "../../utils/icons";
+
+function obtenerImagen(nombre) {    
+    return require('../../assests/lideres/'+nombre+'.jpg')
+}
 
 export default function InfoLideresTemp(props) {
-    const {lider, setShowModal} = props;
-    console.log(lider)
+    const {lider, setShowModal, imagenes} = props;
 
     const eliminarLiderTemp = () => {
         deleteLiderTemp(lider.id);
@@ -36,9 +40,94 @@ export default function InfoLideresTemp(props) {
                 })                    
         };
 
-    return (
+        console.log("prueba")
+
+    return (        
         <Container className="info-lideresTemp">
             <h1>Información Lider</h1>
+            <Row>
+                <Col sm={12}>
+                    <fieldset className="formulario-lider__resumen">
+                        <legend>Imagenes</legend>
+                        <Row>
+                            <Col sm={3}>
+                                {!imagenes.imagen1 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"1")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen2 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"2")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen3 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"3")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen4 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"4")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm={3}>
+                                {!imagenes.imagen5 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"5")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen6 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"6")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen7 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"7")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen8 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"8")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm={3}>
+                                {!imagenes.imagen9 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"9")} alt="imagen1" height="100px" width="100px" />
+                                )}
+                            </Col>
+                            <Col sm={3}>
+                                {!imagenes.imagen10 ? (
+                                    <Camera />
+                                ) : (
+                                    <img src={obtenerImagen(lider.id+"10")} alt="imagen1" height="100px" width="100px" />
+                                )}  
+                            </Col>
+                        </Row>
+                    </fieldset>
+                </Col>
+            </Row>
             <Row>
                 <Col sm={6}>
                     <fieldset className="formulario-lider__resumen">
