@@ -6388,6 +6388,73 @@ istanbul-reports@^2.2.6:
   dependencies:
     html-escaper "^2.0.0"
 
+itsa-classes@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/itsa-classes/-/itsa-classes-1.0.3.tgz#24ca7e144bf2d9115899edbf00ef3aa1f35127ff"
+  integrity sha1-JMp+FEvy2RFYme2/AO86ofNRJ/8=
+
+itsa-dom@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/itsa-dom/-/itsa-dom-1.2.2.tgz#a2624dda9b936cec0f59b8fc4a6296ab516fcbcb"
+  integrity sha512-7cr1gSYddUZQSYYBfhiLl3PLn1GFjKIy+nRtjLrGgP15dOk0GTp7/oBWfMgCBE9M5VrlvUqSGJZZ9Ogzt0oJlw==
+  dependencies:
+    itsa-jsext "^2.0.2"
+    itsa-utils "^1.4.1"
+
+itsa-fetch@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/itsa-fetch/-/itsa-fetch-1.4.3.tgz#d00db30446c7f6133ab3c73058f6c23d4e55fe0b"
+  integrity sha512-baz20iaoFuo8wxKsZ2HKG1rN1y6jbOYTSieMcZxkSB5iqsLB2D2afJxrhDnFYHUg9Uy1uI9cI3PuAJ6meAz3pw==
+  dependencies:
+    itsa-classes "^1.0.3"
+    itsa-jsext "^2.0.2"
+    itsa-utils "^1.4.1"
+    xmldom "^0.1.27"
+    xmlhttprequest "^1.8.0"
+
+itsa-jsext@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/itsa-jsext/-/itsa-jsext-2.0.2.tgz#5afb3e40c71629fb0b473f15b41aa4d99c83681d"
+  integrity sha512-INqZgkF/PvfBemlEMZIUN1PGd2dCr2UzUy1INh2DnverH4C8QddJ6feAtowlciK3pXAYNFnN3p8ig+Ho/E3cPw==
+  dependencies:
+    itsa-utils "^1.4.0"
+
+itsa-react-anchorbutton@^16.0.7:
+  version "16.0.8"
+  resolved "https://registry.yarnpkg.com/itsa-react-anchorbutton/-/itsa-react-anchorbutton-16.0.8.tgz#9030e357e01b6d95d336c30bdc19a91dd5044a93"
+  integrity sha512-PCHxJc7c42AYWzSwFObv3CVgE11kFZjtfh7TFt3ld1KVA18pNVpsQZcTzOrx/TEmOEjkWwVIcFcPv80MLt5vrQ==
+  dependencies:
+    itsa-dom "^1.2.2"
+    itsa-utils "^1.4.1"
+    prop-types "^15.6.0"
+
+itsa-react-clone-props@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/itsa-react-clone-props/-/itsa-react-clone-props-1.1.1.tgz#ae71a85cdbbb808950ed70513a4f998d858dfbe9"
+  integrity sha512-sGMkEgc4ItunPd2MtoyZmiyLxw8XixStNqbSwXYWu3I7tPzEUuVCuZ13uXNgBPvileBSBAGrimEY3QJSZpfKPg==
+  dependencies:
+    itsa-jsext "^2.0.2"
+
+itsa-react-filedownloadbutton@^16.1.5:
+  version "16.1.5"
+  resolved "https://registry.yarnpkg.com/itsa-react-filedownloadbutton/-/itsa-react-filedownloadbutton-16.1.5.tgz#41ec38826074d3cd86a23365485f94bdc07185dc"
+  integrity sha512-Xlgky0HJTpeRPluujYMLlLi5J0+6CUq6c+jVfMdaFX2rTWx/i1gwJkZTmAxkW/j1U2OCR5pqjUFU9pXPy4ayYA==
+  dependencies:
+    itsa-dom "^1.2.2"
+    itsa-fetch "^1.4.3"
+    itsa-jsext "^2.0.2"
+    itsa-react-anchorbutton "^16.0.7"
+    itsa-react-clone-props "^1.1.1"
+    itsa-utils "^1.4.1"
+    mime-db "^1.23.0"
+    node-safe-filesaver "^0.1.0"
+    prop-types "^15.5.10"
+
+itsa-utils@^1.4.0, itsa-utils@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/itsa-utils/-/itsa-utils-1.4.1.tgz#f09127c2260f79f5215119c06fade92b22e61a1f"
+  integrity sha512-xdTpZFsQeZmPN16WC5J+7B69NSsHtYmPq9VqB3hfvtYn8Buoh0V6hy1Lo0ZU6iLn5V4VRUHLVB8sbkuT67bijA==
+
 jest-changed-files@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-24.9.0.tgz#08d8c15eb79a7fa3fc98269bc14b451ee82f8039"
@@ -7414,6 +7481,11 @@ mime-db@1.43.0, "mime-db@>= 1.43.0 < 2":
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.43.0.tgz#0a12e0502650e473d735535050e7c8f4eb4fae58"
   integrity sha512-+5dsGEEovYbT8UY9yD7eE4XTc4UwJ1jBYlgaQQF38ENsKR3wj/8q8RFZrF9WIZpB2V1ArTVFUva8sAul1NzRzQ==
 
+mime-db@^1.23.0:
+  version "1.45.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.45.0.tgz#cceeda21ccd7c3a745eba2decd55d4b73e7879ea"
+  integrity sha512-CkqLUxUk15hofLoLyljJSrukZi8mAtgd+yE5uO4tqRZsdsAJKv0O+rFMhVDRJgozy+yG6md5KwuXhD4ocIoP+w==
+
 mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24:
   version "2.1.26"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.26.tgz#9c921fc09b7e149a65dfdc0da4d20997200b0a06"
@@ -7756,6 +7828,11 @@ node-releases@^1.1.52:
   integrity sha512-snSiT1UypkgGt2wxPqS6ImEUICbNCMb31yaxWrOLXjhlt2z2/IBpaOxzONExqSm4y5oLnAqjjRWu+wsDzK5yNQ==
   dependencies:
     semver "^6.3.0"
+
+node-safe-filesaver@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/node-safe-filesaver/-/node-safe-filesaver-0.1.0.tgz#52cf03f0252d7e9360b50f1037f47510d8b0d74d"
+  integrity sha1-Us8D8CUtfpNgtQ8QN/R1ENiw100=
 
 node-sass@^4.14.1:
   version "4.14.1"
@@ -9250,7 +9327,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -12068,6 +12145,16 @@ xmlchars@^2.1.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+
+xmldom@^0.1.27:
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.31.tgz#b76c9a1bd9f0a9737e5a72dc37231cf38375e2ff"
+  integrity sha512-yS2uJflVQs6n+CyjHoaBmVSqIDevTAWrzMmjG1Gc7h1qQ7uVozNhEPJAwZXWyGQ/Gafo3fCwrcaokezLPupVyQ==
+
+xmlhttprequest@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"
+  integrity sha1-Z/4HXFwk/vOfnWX197f+dRcZaPw=
 
 xregexp@^4.3.0:
   version "4.3.0"
