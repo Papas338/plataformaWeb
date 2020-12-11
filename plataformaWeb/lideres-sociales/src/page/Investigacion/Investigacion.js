@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { logoutApi } from "../../api/auth";
 import investigacion from "../../document/Documento final proyecto de investigacion Lideres Sociales.pdf";
+import entrevista from "../../files/interviews/Entrevista unida Liney.mp3";
 
 export default function Investigacion(props) {
 
@@ -21,7 +22,7 @@ export default function Investigacion(props) {
                 </Col>
                 <Col className="visuaLider__headerIndex" sm={2}>
                     {/* <Button variant="info" as={Link} to="/">Volver al inicio</Button> */}
-                    <Button variant="info" as="a" href={require('../../files/interviews/Entrevista unida Liney.mp3')} download="Entrevista Liney.mp3">
+                    <Button variant="info" as="a" href={entrevista} download="Entrevista Liney.mp3">
                         Descargar entrevista
                     </Button>
                 </Col>
