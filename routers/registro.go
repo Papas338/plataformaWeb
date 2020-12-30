@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
+	"github.com/proyLSIPAZUD/plataformaWeb/blockchain"
 	"github.com/proyLSIPAZUD/plataformaWeb/models"
 )
 
@@ -26,6 +27,23 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Debe especificar una contraseña de al menos 6 caracteres", 400)
 		return
 	}
+
+	address, privateKey, publicKey := blockchain.GenerateRandom64HexString()
+	_, statusPublicKey, _ := bd.VerificarPublicKey(publicKey)
+
+	for statusPublicKey {
+		address, privateKey, publicKey = blockchain.GenerateRandom64HexString()
+		_, statusPublicKey, _ = bd.VerificarPublicKey(publicKey)
+	}
+
+	t.Address = address
+	t.PrivateKey = privateKey
+	t.PublicKey = publicKey
+
+	_, adminPrivateKey, _ := bd.ObtenerAdmin()
+	key := []byte("example key 1234")
+
+	blockchain.Transaction(bd.Desencriptar(key, adminPrivateKey), t.PrivateKey)
 
 	if t.Role != "Administrador" && t.Role != "Usuario" {
 		http.Error(w, "Debe ingresar una rol valido", 400)
