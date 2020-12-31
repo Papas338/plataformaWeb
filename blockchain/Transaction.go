@@ -15,12 +15,12 @@ const (
 	networkType = sdk.PublicTest
 )
 
-func Transaction(sender string, addressee string) {
+func Transaction(sender string, addressee string) (string, string, string) {
 
 	conf, err := sdk.NewConfig(context.Background(), []string{baseUrl})
 	if err != nil {
 		fmt.Printf("NewConfig returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Use the default http client
@@ -30,14 +30,14 @@ func Transaction(sender string, addressee string) {
 	account, err := sdk.NewAccountFromPrivateKey(sender, networkType, client.GenerationHash())
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Create an account from a private key
 	receiver, err := sdk.NewAccountFromPrivateKey(addressee, networkType, client.GenerationHash())
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Create a new transfer type transaction
@@ -47,28 +47,31 @@ func Transaction(sender string, addressee string) {
 		// The address of the recipient account.
 		receiver.Address,
 		// The array of mosaic to be sent.
-		[]*sdk.Mosaic{sdk.Xpx(81000000)},
+		[]*sdk.Mosaic{sdk.Xpx(20000000)},
 		// The transaction message of 1024 characters.
 		sdk.NewPlainMessage("Enviado 81xpx a de test1 a test 2"),
 	)
 	if err != nil {
 		fmt.Printf("NewTransferTransaction returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Sign transaction
 	signedTransaction, err := account.Sign(transaction)
 	if err != nil {
 		fmt.Printf("Sign returned error: %s", err)
-		return
+		return "", "", ""
 	}
-	fmt.Printf("Content: \t\t%v", signedTransaction.Hash)
+
+	hash := fmt.Sprintf("%s", signedTransaction.Hash)
 
 	// Announce transaction
 	_, err = client.Transaction.Announce(context.Background(), signedTransaction)
 	if err != nil {
 		fmt.Printf("Transaction.Announce returned error: %s", err)
-		return
+		return "", "", ""
 	}
 	time.Sleep(30 * time.Second)
+
+	return hash, account.Address.Address, receiver.Address.Address
 }

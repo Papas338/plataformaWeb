@@ -8,17 +8,17 @@ import (
 	"github.com/proximax-storage/go-xpx-chain-sdk/sdk"
 )
 
-////Esta función es basada en AggregateBonded
+//Esta función es basada en AggregateBonded
 
 /*AddCosigner permite agregar pasantes a las transacciones de blockchain */
-func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPrivateKey string) {
+func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPrivateKey string) (string, string, string, string) {
 
 	fmt.Println("addCosigner")
 
 	conf, err := sdk.NewConfig(context.Background(), []string{baseUrl})
 	if err != nil {
 		fmt.Printf("NewConfig returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	// Use the default http client
@@ -28,13 +28,13 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	multisig, err := client.NewAccountFromPublicKey(multisigPublicKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPublicKey returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	cosigner, err := client.NewAccountFromPrivateKey(cosignatoryPrivateKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	/* cosigner1, err := client.NewAccountFromPrivateKey(cosign1PrivateKey)
@@ -46,7 +46,7 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	admin, err := client.NewAccountFromPrivateKey(adminPrivateKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	transaction, err := client.NewModifyMultisigAccountTransaction(
@@ -63,7 +63,7 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	)
 	if err != nil {
 		fmt.Printf("NewModifyMultisigAccountTransaction returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	// Convert transactions to inner for an aggregate transaction
@@ -75,9 +75,9 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	signedAggregateBoundedTransaction, err := cosigner.Sign(aggregateBondedTransaction)
 	if err != nil {
 		fmt.Printf("Sign returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
-	fmt.Printf("Content: \t\t%v", signedAggregateBoundedTransaction.Hash)
+	hashBounded := fmt.Sprintf("%s", signedAggregateBoundedTransaction.Hash)
 
 	// Create lock funds transaction for aggregate bounded
 	lockFundsTransaction, err := client.NewLockFundsTransaction(
@@ -92,22 +92,22 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	)
 	if err != nil {
 		fmt.Printf("NewLockFundsTransaction returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	// Sign transaction
 	signedLockFundsTransaction, err := cosigner.Sign(lockFundsTransaction)
 	if err != nil {
 		fmt.Printf("Sign returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
-	fmt.Printf("Content: \t\t%v", signedLockFundsTransaction.Hash)
+	hashLockFunds := fmt.Sprintf("%s", signedLockFundsTransaction.Hash)
 
 	// Announce transaction
 	_, err = client.Transaction.Announce(context.Background(), signedLockFundsTransaction)
 	if err != nil {
 		fmt.Printf("Transaction.Announce returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	// Wait for lock funds transaction to be harvested
@@ -117,7 +117,7 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	_, _ = client.Transaction.AnnounceAggregateBonded(context.Background(), signedAggregateBoundedTransaction)
 	if err != nil {
 		fmt.Printf("Transaction.AnnounceAggregateBonded returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	// Wait for aggregate bounded transaction to be harvested
@@ -143,17 +143,19 @@ func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPr
 	signedThirdAccountCosignatureTransaction, err := admin.SignCosignatureTransaction(thirdAccountCosignatureTransaction)
 	if err != nil {
 		fmt.Printf("SignCosignatureTransaction returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 
 	// Announce transaction
 	_, err = client.Transaction.AnnounceAggregateBondedCosignature(context.Background(), signedThirdAccountCosignatureTransaction)
 	if err != nil {
 		fmt.Printf("AnnounceAggregateBoundedCosignature returned error: %s", err)
-		return
+		return "", "", "", ""
 	}
 	// wait for the transaction to be confirmed! (very important)
 	// you can use websockets to wait explicitly for transaction
 	// to be in certain state, instead of hard waiting
 	time.Sleep(45 * time.Second)
+
+	return hashBounded, hashLockFunds, cosigner.Address.Address, admin.Address.Address
 }

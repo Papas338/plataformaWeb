@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
+	"github.com/proyLSIPAZUD/plataformaWeb/blockchain"
 	"github.com/proyLSIPAZUD/plataformaWeb/models"
 )
 
@@ -14,7 +15,7 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	decodificar := json.NewDecoder(r.Body)
 	err := decodificar.Decode(&t)
 
-	RegistroEsri(t)
+	//RegistroEsri(t)
 
 	if err != nil {
 		http.Error(w, "Error en los datos recibidos "+err.Error(), 400)
@@ -23,6 +24,32 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 
 	if len(t.Nombre) == 0 {
 		http.Error(w, "El nombre del lider es requerido", 400)
+		return
+	}
+
+	var users models.Usuario
+
+	_, resultado := bd.ObtenerAdmin()
+
+	key := []byte("example key 1234")
+	adminPrivateKey := bd.Desencriptar(key, resultado.PrivateKey)
+	multiSignPrivateKey := bd.Desencriptar(key, resultado.MsPrivateKey)
+
+	users, _ = bd.ObtenerUsuario("5fe810bd975220d567571ba7")
+
+	userPrivateKey := bd.Desencriptar(key, users.PrivateKey)
+
+	hashBounded, _, cosigner := blockchain.LiderUploadTransaction(multiSignPrivateKey, userPrivateKey, adminPrivateKey)
+
+	var upload models.Transaction
+
+	upload.Tipo = "uploadLider"
+	upload.Hash = hashBounded
+	upload.Cosigner = cosigner
+
+	_, saveTransaction, _ := bd.RegistrarTransaccion(upload)
+	if saveTransaction == false {
+		http.Error(w, "Ocurrió un error al intentar realizar el registro del lider", 400)
 		return
 	}
 

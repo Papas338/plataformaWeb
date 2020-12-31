@@ -21,10 +21,12 @@ func ModificarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	var users models.Usuario
 
-	_, admPrivateKey, multiSignPublicKey := bd.ObtenerAdmin()
+	_, resultado := bd.ObtenerAdmin()
+
+	multiSignPublicKey := resultado.MsPublicKey
 
 	key := []byte("example key 1234")
-	adminPrivateKey := bd.Desencriptar(key, admPrivateKey)
+	adminPrivateKey := bd.Desencriptar(key, resultado.PrivateKey)
 
 	fmt.Println("Cuenta multifirma " + multiSignPublicKey)
 
@@ -35,12 +37,49 @@ func ModificarUsuario(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(users.Address)
 
 	fmt.Println("Antes de transacción")
-	fmt.Println(users.Role)
 
 	if users.Role == "Usuario" {
-		blockchain.AddCosigner(multiSignPublicKey, userPrivateKey, adminPrivateKey)
+		hashBounded, hashLockFound, cosigner, admin := blockchain.AddCosigner(multiSignPublicKey, userPrivateKey, adminPrivateKey)
+		var bounded models.Transaction
+
+		bounded.Tipo = "AddCosigner"
+		bounded.Hash = hashBounded
+		bounded.Cosigner = cosigner
+
+		_, saveTransaction, _ := bd.RegistrarTransaccion(bounded)
+		if saveTransaction == false {
+			http.Error(w, "No se agrego consignatario", 400)
+			return
+		}
+
+		var lockFounds models.Transaction
+
+		lockFounds.Tipo = "LockFounds"
+		lockFounds.Hash = hashLockFound
+		lockFounds.Cosigner = cosigner
+		lockFounds.Signer = admin
+
+		_, saveTransaction, _ = bd.RegistrarTransaccion(lockFounds)
+		if saveTransaction == false {
+			http.Error(w, "No se agrego consignatario por falta de fondos", 400)
+			return
+		}
+
 	} else {
-		blockchain.RemoveCosigner(multiSignPublicKey, userPrivateKey, adminPrivateKey)
+		hashCompleted, cosigner, admin := blockchain.RemoveCosigner(multiSignPublicKey, userPrivateKey, adminPrivateKey)
+		var completed models.Transaction
+
+		completed.Tipo = "RemoveCosigner"
+		completed.Hash = hashCompleted
+		completed.Cosigner = cosigner
+		completed.Signer = admin
+
+		_, saveTransaction, _ := bd.RegistrarTransaccion(completed)
+		if saveTransaction == false {
+			http.Error(w, "No se borro consignatario", 400)
+			return
+		}
+
 	}
 
 	fmt.Println("Despues de transacción")

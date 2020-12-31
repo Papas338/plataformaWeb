@@ -10,7 +10,7 @@ import (
 )
 
 /*ObtenerAdmin permite evitar claves privadas iguales dentro de la blockchain */
-func ObtenerAdmin() (bool, string, string) {
+func ObtenerAdmin() (bool, models.Usuario) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -23,10 +23,10 @@ func ObtenerAdmin() (bool, string, string) {
 
 	err := col.FindOne(ctx, condicion).Decode(&resultado)
 	if err != nil {
-		return false, "", ""
+		return false, resultado
 	}
 
 	fmt.Println(resultado.MsAddress)
 
-	return true, resultado.PrivateKey, resultado.MsPublicKey
+	return true, resultado
 }

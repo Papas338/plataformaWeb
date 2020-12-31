@@ -40,10 +40,31 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 	t.PrivateKey = privateKey
 	t.PublicKey = publicKey
 
-	_, adminPrivateKey, _ := bd.ObtenerAdmin()
+	var create models.Transaction
+
+	create.Tipo = "CreateUserAccount"
+	create.Signer = address
+
+	_, resultado := bd.ObtenerAdmin()
 	key := []byte("example key 1234")
 
-	blockchain.Transaction(bd.Desencriptar(key, adminPrivateKey), t.PrivateKey)
+	sender := bd.Desencriptar(key, resultado.PrivateKey)
+	addresee := t.PrivateKey
+
+	hashTransfer, cosigner, signer := blockchain.Transaction(sender, addresee)
+
+	var transfer models.Transaction
+
+	transfer.Tipo = "Transfer"
+	transfer.Hash = hashTransfer
+	transfer.Cosigner = cosigner
+	transfer.Signer = signer
+
+	_, saveTransaction, _ := bd.RegistrarTransaccion(transfer)
+	if saveTransaction == false {
+		http.Error(w, "Error al generar la transacción", 400)
+		return
+	}
 
 	if t.Role != "Administrador" && t.Role != "Usuario" {
 		http.Error(w, "Debe ingresar una rol valido", 400)

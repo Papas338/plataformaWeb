@@ -18,14 +18,14 @@ const (
 //Esta función es basada en AggregateComplete
 
 /*RemoveCosigner permite eliminar al pasante de las transacciones en blockchain */
-func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPrivateKey string) {
+func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPrivateKey string) (string, string, string) {
 
 	fmt.Println("removeCosigner")
 
 	conf, err := sdk.NewConfig(context.Background(), []string{baseUrl})
 	if err != nil {
 		fmt.Printf("NewConfig returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Use the default http client
@@ -35,13 +35,13 @@ func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, admi
 	multisig, err := client.NewAccountFromPublicKey(multisigPublicKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPublicKey returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	cosigner, err := client.NewAccountFromPrivateKey(cosignatoryPrivateKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	/* cosigner1, err := client.NewAccountFromPrivateKey(cosign1PrivateKey)
@@ -53,7 +53,7 @@ func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, admi
 	admin, err := client.NewAccountFromPrivateKey(adminPrivateKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	transaction, err := client.NewModifyMultisigAccountTransaction(
@@ -70,7 +70,7 @@ func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, admi
 	)
 	if err != nil {
 		fmt.Printf("NewModifyMultisigAccountTransaction returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Convert transactions to inner for an aggregate transaction
@@ -83,18 +83,20 @@ func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, admi
 	signedAggregateCompletedTransaction, err := admin.Sign(aggregateCompletedTransaction)
 	if err != nil {
 		fmt.Printf("Sign returned error: %s", err)
-		return
+		return "", "", ""
 	}
-	fmt.Printf("Content: \t\t%v", signedAggregateCompletedTransaction.Hash)
+	hashCompleted := fmt.Sprintf("%s", signedAggregateCompletedTransaction.Hash)
 
 	// Announce aggregate bounded transaction
 	_, _ = client.Transaction.Announce(context.Background(), signedAggregateCompletedTransaction)
 	if err != nil {
 		fmt.Printf("Transaction.AnnounceAggregateCompleted returned error: %s", err)
-		return
+		return "", "", ""
 	}
 
 	// Wait for aggregate bounded transaction to be harvested
 	time.Sleep(30 * time.Second)
+
+	return hashCompleted, cosigner.Address.Address, admin.Address.Address
 
 }
