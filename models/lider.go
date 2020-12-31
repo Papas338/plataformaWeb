@@ -67,5 +67,7 @@ type Lider struct {
 	LinkRelacionLabor3        string             `bson:"linkRelacionLabor3" json:"linkRelacionLabor3,omitempty"`
 	LinkRelacionLabor4        string             `bson:"linkRelacionLabor4" json:"linkRelacionLabor4,omitempty"`
 	LinkRelacionLabor5        string             `bson:"linkRelacionLabor5" json:"linkRelacionLabor5,omitempty"`
-	Hash                      string             `bson:"hash5" json:"hash5,omitempty"`
+	Address                   string             `bson:"address" json:"address,omitempty"`
+	PrivateKey                string             `bson:"privateKey" json:"privateKey,omitempty"`
+	PublicKey                 string             `bson:"publicKey" json:"publicKey,omitempty"`
 }
