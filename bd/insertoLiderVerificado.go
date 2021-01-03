@@ -17,6 +17,10 @@ func InsertoLiderVerificado(t models.LiderGeneral) (string, bool, error) {
 	db := MongoCN.Database("proyectolideres")
 	col := db.Collection("lider")
 
+	key := []byte("example key 1234")
+
+	t.PrivateKey = Encriptar(key, t.PrivateKey)
+
 	result, err := col.InsertOne(ctx, t)
 	if err != nil {
 		return "", false, err

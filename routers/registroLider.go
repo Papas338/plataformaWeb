@@ -2,7 +2,9 @@ package routers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
 	"github.com/proyLSIPAZUD/plataformaWeb/blockchain"
@@ -35,7 +37,7 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	adminPrivateKey := bd.Desencriptar(key, resultado.PrivateKey)
 	multiSignPrivateKey := bd.Desencriptar(key, resultado.MsPrivateKey)
 
-	users, _ = bd.ObtenerUsuario("5fe810bd975220d567571ba7")
+	users, _ = bd.ObtenerUsuario(IDUsuario)
 
 	userPrivateKey := bd.Desencriptar(key, users.PrivateKey)
 
@@ -86,6 +88,36 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	transfer.Signer = signer
 
 	_, saveTransaction, _ = bd.RegistrarTransaccion(transfer)
+	if saveTransaction == false {
+		http.Error(w, "Error al generar la transacción", 400)
+		return
+	}
+
+	HashNamespace := blockchain.RegisterNamespace(t.PrivateKey, strings.ReplaceAll(t.Nombre, " ", "_"))
+
+	var namespace models.Transaction
+
+	namespace.Tipo = "NamespaceLider"
+	namespace.Hash = HashNamespace
+	namespace.Signer = t.Address
+
+	_, saveTransaction, _ = bd.RegistrarTransaccion(namespace)
+	if saveTransaction == false {
+		http.Error(w, "Error al generar la transacción", 400)
+		return
+	}
+
+	HashAlias := blockchain.TransactionAlias(t.PrivateKey, strings.ReplaceAll(t.Nombre, " ", "_"))
+
+	fmt.Println("private key lider " + t.PrivateKey)
+
+	var alias models.Transaction
+
+	alias.Tipo = "AliasLider"
+	alias.Hash = HashAlias
+	alias.Signer = t.Address
+
+	_, saveTransaction, _ = bd.RegistrarTransaccion(alias)
 	if saveTransaction == false {
 		http.Error(w, "Error al generar la transacción", 400)
 		return

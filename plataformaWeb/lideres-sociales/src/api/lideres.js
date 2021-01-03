@@ -190,3 +190,24 @@ export function signUpLiderTemp(lider) {
         return err;
       });
   }
+
+  export function descargaInfo(Id) {
+    const url = `${API_HOST}/descargaInfo?id=${Id}`;
+  
+    const params = {
+      headers: {
+        Authorization: `Bearer ${getTokenApi()}`,
+      },
+    };
+  
+    return fetch(url, params)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        return result;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }

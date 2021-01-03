@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button} from "react-bootstrap";
 import "./InfoLideres.scss";
 import { Image, Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 import { Camera } from "../../utils/icons";
+import { descargaInfo } from "../../api/lideres"
 
 function obtenerImagen(nombre) {    
     return require('../../assests/lideres/'+nombre+'.jpg')
@@ -24,9 +25,15 @@ export default function InfoLideres(props) {
         flexGrow: 1
         }
     });
+
+    const [show, setShow] = useState(true);
+
+    const descarga = () => {        
+        descargaInfo(lider.id);
+    }    
     
     // Create Document Component
-    const MyDocument = () => (
+    const MyDocument = () => (      
         <Document>
         <Page size="A4" style={styles.page}>
             <View style={styles.section}>
@@ -223,10 +230,25 @@ export default function InfoLideres(props) {
                 </fieldset>                                
             </Row>            
             <Row className="justify-content-md-center">                    
-                <Button as={PDFDownloadLink} document={<MyDocument />} fileName={fileName} variant="success">
-                    {({ blob, url, loading, error }) => (loading ? 'Cargando información...' : 'Descargar información')}
+                <Button onClick={() => {
+                    descarga();
+                    setShow(!show);
+                }} variant="success">
+                   Descargar información
                 </Button>
             </Row>
+            {show ? (
+                <Row className="justify-content-md-center">
+                    Descargue un PDF con todos los datos del lider social
+                </Row>
+            ) : (                
+                <Row className="justify-content-md-center">
+                    Link de descarga:               
+                    <PDFDownloadLink document={<MyDocument />} fileName={fileName} variant="success">
+                        {({ blob, url, loading, error }) => (loading ? 'Cargando información...' : 'Información de lider')}
+                    </PDFDownloadLink>
+                </Row>
+            )}
         </Container>
     )
 }
