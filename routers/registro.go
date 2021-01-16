@@ -2,6 +2,7 @@ package routers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/proyLSIPAZUD/plataformaWeb/bd"
@@ -39,6 +40,8 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 	t.Address = address
 	t.PrivateKey = privateKey
 	t.PublicKey = publicKey
+
+	fmt.Println("usuario " + t.PrivateKey)
 
 	var create models.Transaction
 

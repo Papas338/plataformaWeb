@@ -11,7 +11,7 @@ import (
 //Esta función es basada en AggregateBonded
 
 /*LiderUploadTransaction permite crear transacciones de blockchain al cargar un lider social */
-func LiderUploadTransaction(multisigPrivateKey string, cosignatoryPrivateKey string, adminPrivateKey string) (string, string, string) {
+func LiderUploadTransaction(multisigPrivateKey string, cosignatoryPrivateKey string) (string, string, string) {
 
 	fmt.Println("LiderUploadTransaction")
 
@@ -32,12 +32,6 @@ func LiderUploadTransaction(multisigPrivateKey string, cosignatoryPrivateKey str
 	}
 
 	cosigner, err := client.NewAccountFromPrivateKey(cosignatoryPrivateKey)
-	if err != nil {
-		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
-		return "", "", ""
-	}
-
-	admin, err := client.NewAccountFromPrivateKey(adminPrivateKey)
 	if err != nil {
 		fmt.Printf("NewAccountFromPrivateKey returned error: %s", err)
 		return "", "", ""
@@ -131,7 +125,7 @@ func LiderUploadTransaction(multisigPrivateKey string, cosignatoryPrivateKey str
 		return
 	} */
 
-	// Create cosignature transaction from third account
+	/* // Create cosignature transaction from third account
 	thirdAccountCosignatureTransaction := sdk.NewCosignatureTransactionFromHash(signedAggregateBoundedTransaction.Hash)
 	signedThirdAccountCosignatureTransaction, err := admin.SignCosignatureTransaction(thirdAccountCosignatureTransaction)
 	if err != nil {
@@ -148,7 +142,7 @@ func LiderUploadTransaction(multisigPrivateKey string, cosignatoryPrivateKey str
 	// wait for the transaction to be confirmed! (very important)
 	// you can use websockets to wait explicitly for transaction
 	// to be in certain state, instead of hard waiting
-	time.Sleep(45 * time.Second)
+	time.Sleep(45 * time.Second) */
 
 	return hashBounded, hashLockFunds, cosigner.Address.Address
 }

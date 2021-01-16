@@ -70,4 +70,5 @@ type LiderGeneral struct {
 	Address                   string             `bson:"address" json:"address,omitempty"`
 	PrivateKey                string             `bson:"privateKey" json:"privateKey,omitempty"`
 	PublicKey                 string             `bson:"publicKey" json:"publicKey,omitempty"`
+	Hash                      string             `bson:"hash" json:"hash,omitempty"`
 }

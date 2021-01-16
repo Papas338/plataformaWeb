@@ -29,32 +29,28 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var users models.Usuario
-
+	//Se firma la transaccion que genero el pasante
 	_, resultado := bd.ObtenerAdmin()
 
 	key := []byte("example key 1234")
 	adminPrivateKey := bd.Desencriptar(key, resultado.PrivateKey)
-	multiSignPrivateKey := bd.Desencriptar(key, resultado.MsPrivateKey)
 
-	users, _ = bd.ObtenerUsuario(IDUsuario)
+	hashSigner, signerAddress, _ := blockchain.SignerTransaction(adminPrivateKey, t.Hash)
 
-	userPrivateKey := bd.Desencriptar(key, users.PrivateKey)
+	//Se regista la transaccion de la firma
+	var firma models.Transaction
 
-	hashBounded, _, cosigner := blockchain.LiderUploadTransaction(multiSignPrivateKey, userPrivateKey, adminPrivateKey)
+	firma.Tipo = "SignerTransaction"
+	firma.Signer = signerAddress
+	firma.Hash = hashSigner
 
-	var upload models.Transaction
-
-	upload.Tipo = "uploadLider"
-	upload.Hash = hashBounded
-	upload.Cosigner = cosigner
-
-	_, saveTransaction, _ := bd.RegistrarTransaccion(upload)
+	_, saveTransaction, _ := bd.RegistrarTransaccion(firma)
 	if saveTransaction == false {
-		http.Error(w, "Ocurrió un error al intentar realizar el registro del lider", 400)
+		http.Error(w, "Error al generar la transacción", 400)
 		return
 	}
 
+	//Se genera la cuenta de blockchain para el lider social
 	address, privateKey, publicKey := blockchain.GenerateRandom64HexString()
 	_, statusPublicKey, _ := bd.VerificarPublicKey(publicKey)
 
@@ -67,11 +63,21 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 	t.PrivateKey = privateKey
 	t.PublicKey = publicKey
 
+	fmt.Println("lider " + t.PrivateKey)
+
+	//Se registra la transaccion de crear la cuenta del lider
 	var create models.Transaction
 
 	create.Tipo = "CreateLiderAccount"
 	create.Signer = address
 
+	_, saveTransaction, _ = bd.RegistrarTransaccion(create)
+	if saveTransaction == false {
+		http.Error(w, "Error al generar la transacción", 400)
+		return
+	}
+
+	//Se hace una transferencia a la cuenta del lider
 	_, resultado = bd.ObtenerAdmin()
 	key = []byte("example key 1234")
 
@@ -80,6 +86,7 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 
 	hashTransfer, cosigner, signer := blockchain.Transaction(sender, addresee)
 
+	//Se registra la transaccion de la transferencia
 	var transfer models.Transaction
 
 	transfer.Tipo = "TransferLider"
@@ -93,8 +100,10 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//Se crea un namespace con la cuenta del lider
 	HashNamespace := blockchain.RegisterNamespace(t.PrivateKey, strings.ReplaceAll(t.Nombre, " ", "_"))
 
+	//Se registra la transaccion del namespace
 	var namespace models.Transaction
 
 	namespace.Tipo = "NamespaceLider"
@@ -107,10 +116,12 @@ func RegistroLider(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//Se crea un alias con el namespace
 	HashAlias := blockchain.TransactionAlias(t.PrivateKey, strings.ReplaceAll(t.Nombre, " ", "_"))
 
 	fmt.Println("private key lider " + t.PrivateKey)
 
+	//Se registra la transaccion del alias
 	var alias models.Transaction
 
 	alias.Tipo = "AliasLider"
