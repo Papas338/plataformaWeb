@@ -13,8 +13,6 @@ import (
 /*LiderUploadTransaction permite crear transacciones de blockchain al cargar un lider social */
 func LiderUploadTransaction(multisigPrivateKey string, cosignatoryPrivateKey string) (string, string, string) {
 
-	fmt.Println("LiderUploadTransaction")
-
 	conf, err := sdk.NewConfig(context.Background(), []string{baseUrl})
 	if err != nil {
 		fmt.Printf("NewConfig returned error: %s", err)

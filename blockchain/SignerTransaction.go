@@ -19,8 +19,6 @@ func SignerTransaction(adminPrivateKey string, hash string) (string, string, str
 	// Use the default http client
 	client := sdk.NewClient(nil, conf)
 
-	fmt.Println("Este es le hash" + hash)
-
 	transactionStatus, err := client.Transaction.GetTransactionStatus(context.Background(), hash)
 	if err != nil {
 		fmt.Printf("Transaction.GetTransactionStatus returned error: %s", err)
@@ -33,7 +31,6 @@ func SignerTransaction(adminPrivateKey string, hash string) (string, string, str
 		return "", "", ""
 	}
 
-	fmt.Println("Creando firma")
 	// Create cosignature transaction from third account
 	thirdAccountCosignatureTransaction := sdk.NewCosignatureTransactionFromHash(transactionStatus.Hash)
 	signedThirdAccountCosignatureTransaction, err := admin.SignCosignatureTransaction(thirdAccountCosignatureTransaction)
@@ -48,7 +45,6 @@ func SignerTransaction(adminPrivateKey string, hash string) (string, string, str
 		fmt.Printf("AnnounceAggregateBoundedCosignature returned error: %s", err)
 		return "", "", ""
 	}
-	fmt.Println("Terminando firma")
-
+	
 	return signedThirdAccountCosignatureTransaction.ParentHash.String(), admin.Address.Address, ""
 }

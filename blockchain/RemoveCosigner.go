@@ -20,8 +20,6 @@ const (
 /*RemoveCosigner permite eliminar al pasante de las transacciones en blockchain */
 func RemoveCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPrivateKey string) (string, string, string) {
 
-	fmt.Println("removeCosigner")
-
 	conf, err := sdk.NewConfig(context.Background(), []string{baseUrl})
 	if err != nil {
 		fmt.Printf("NewConfig returned error: %s", err)

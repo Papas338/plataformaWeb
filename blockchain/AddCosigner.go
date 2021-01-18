@@ -13,8 +13,6 @@ import (
 /*AddCosigner permite agregar pasantes a las transacciones de blockchain */
 func AddCosigner(multisigPublicKey string, cosignatoryPrivateKey string, adminPrivateKey string) (string, string, string, string) {
 
-	fmt.Println("addCosigner")
-
 	conf, err := sdk.NewConfig(context.Background(), []string{baseUrl})
 	if err != nil {
 		fmt.Printf("NewConfig returned error: %s", err)
