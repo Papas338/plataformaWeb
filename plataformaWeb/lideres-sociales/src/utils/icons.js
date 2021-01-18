@@ -1,0 +1,1 @@
+export { ReactComponent as Camera } from "../assests/svg/camara.svg";

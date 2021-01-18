@@ -10,14 +10,14 @@ import (
 /*GeneroJWT genera el encriptado con JWT */
 func GeneroJWT(t models.Usuario) (string, error) {
 
-	miClave := []byte("julian9809")
+	miClave := []byte("proyectols2020")
 
 	payload := jwt.MapClaims{
 		"email":      t.Email,
 		"role":       t.Role,
 		"isvalidate": t.IsValidate,
 		"_id":        t.ID.Hex(),
-		"exp":        time.Now().Add(time.Hour * 24).Unix(),
+		"exp":        time.Now().Add(time.Hour * 1).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)

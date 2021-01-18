@@ -17,7 +17,25 @@ func Manejadores() {
 
 	router.HandleFunc("/registro", middlew.ChequeoBD(routers.Registro)).Methods("POST")
 	router.HandleFunc("/login", middlew.ChequeoBD(routers.Login)).Methods("POST")
-	router.HandleFunc("/modificarPerfil", middlew.ChequeoBD(middlew.ValidoJWT(routers.ModificarPerfil))).Methods("PUT")
+
+	router.HandleFunc("/listaUsuarios", middlew.ChequeoBD(middlew.ValidoJWT(routers.ListaUsuarios))).Methods("GET")
+	router.HandleFunc("/modificarUsuario", middlew.ChequeoBD(middlew.ValidoJWT(routers.ModificarUsuario))).Methods("PUT")
+
+	router.HandleFunc("/insertoLider", middlew.ChequeoBD(middlew.ValidoJWT(routers.InsertoLider))).Methods("POST")
+	router.HandleFunc("/registroLider", middlew.ChequeoBD(middlew.ValidoJWT(routers.RegistroLider))).Methods("POST")
+
+	router.HandleFunc("/subirImagen", middlew.ChequeoBD(middlew.ValidoJWT(routers.SubirImagen))).Methods("POST")
+	router.HandleFunc("/modificarImagenes", middlew.ChequeoBD(middlew.ValidoJWT(routers.ManejoImagenes))).Methods("PUT")
+	router.HandleFunc("/obtenerImagenes", middlew.ChequeoBD(middlew.ValidoJWT(routers.ObtenerImagenes))).Methods("GET")
+
+	router.HandleFunc("/listaLideresVerificar", middlew.ChequeoBD(middlew.ValidoJWT(routers.ListaLideresTemp))).Methods("GET")
+	router.HandleFunc("/borrarLiderTemp", middlew.ChequeoBD(middlew.ValidoJWT(routers.BorrarLiderTemp))).Methods("DELETE")
+	router.HandleFunc("/listaLideres", middlew.ChequeoBD(middlew.ValidoJWT(routers.ListaLideres))).Methods("GET")
+
+	router.HandleFunc("/departamentos", middlew.ChequeoBD(middlew.ValidoJWT(routers.Departamentos))).Methods("GET")
+	router.HandleFunc("/municipios", middlew.ChequeoBD(middlew.ValidoJWT(routers.Municipios))).Methods("GET")
+
+	router.HandleFunc("/descargaInfo", middlew.ChequeoBD(middlew.ValidoJWT(routers.DescargaInfo))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {

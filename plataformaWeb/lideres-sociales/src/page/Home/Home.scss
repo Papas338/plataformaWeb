@@ -1,0 +1,106 @@
+@import "../../scss/index.scss";
+
+.home {
+  &__bar {
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
+    width: 20%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+
+    #redes {
+      svg {
+        margin: 0px 5px;
+        font-size: 20px;
+        color: $font-primary;
+      }
+    }
+
+    #cerrar {
+      a {
+        display: block;
+        border-radius: 50px;
+        font-size: 10px;
+        font-weight: bold;
+        color: $font-light;
+        text-align: center;
+        line-height: 10px;
+        width: 50%;
+        margin: auto;
+      }
+    }
+  }
+
+  &__headerLogo {
+    div {
+      margin-top: 1em;
+
+      img {
+        height: 12em;
+      }
+    }
+  }
+
+  &__headerBanner {
+    div {
+      width: 45em;
+      height: 10em;
+      overflow: hidden;
+      margin: 10px;
+      margin-top: 2em;
+      position: relative;
+
+      img {
+        position: absolute;
+        left: -100%;
+        right: -100%;
+        top: 100%;
+        bottom: -100%;
+        margin: auto;
+        min-height: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+
+  &__text {
+    p {
+      margin-top: 5em;
+      margin-bottom: 0;
+      text-align: justify;
+    }
+
+    #parrafo {
+      margin-top: 10px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+
+    > div {
+      width: 500px;
+      margin: 4em;
+
+      a {
+        display: block;
+        background-color: $primary;
+        width: 90%;
+        border-radius: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        color: $font-light;
+        padding: 10 px 0;
+        margin: 1rem;
+        text-align: center;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

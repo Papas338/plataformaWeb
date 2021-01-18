@@ -1,0 +1,103 @@
+@import "../../scss/index.scss";
+
+.users {
+  &__header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      font-size: 35px;
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+  }
+
+  &__headerLogout {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: block;
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: bold;
+      color: $font-light;
+      text-align: center;
+      line-height: 10px;
+      width: 30%;
+      margin-left: auto;
+    }
+  }
+
+  &__search {
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    text-align: center;
+    align-items: center;
+
+    input {
+      width: 70%;
+      border-radius: 50px;
+      border: 0;
+      background-color: $background-dark-light;
+      padding: 5px 20px;
+      margin: 5px;
+      color: $font-light;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    a {
+      display: block;
+      width: 70%;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+
+    p {
+      margin-top: 15px;
+      width: 70%;
+      text-align: justify;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+
+    > div {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__usuarios {
+    padding: 0;
+  }
+}
+
+.load-more.btn.btn-primary {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: transparent;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+    color: $primary;
+  }
+}

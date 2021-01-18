@@ -1,0 +1,37 @@
+@import "../../scss/index.scss";
+
+.visuaLider {
+  &__header {
+    text-align: center;
+  }
+
+  &__headerIndex {
+    margin: auto;
+
+    a {
+      display: block;
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: bold;
+      color: $font-light;
+      text-align: center;
+      line-height: 10px;
+      width: 50%;
+    }
+  }
+
+  &__headerLogout {
+    margin: auto;
+
+    a {
+      display: block;
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: bold;
+      color: $font-light;
+      text-align: center;
+      line-height: 10px;
+      width: 50%;
+    }
+  }
+}

@@ -19,6 +19,10 @@ func InsertoRegistro(u models.Usuario) (string, bool, error) {
 
 	u.Password, _ = EncriptarPassword(u.Password)
 
+	key := []byte("example key 1234")
+
+	u.PrivateKey = Encriptar(key, u.PrivateKey)
+
 	result, err := col.InsertOne(ctx, u)
 	if err != nil {
 		return "", false, err

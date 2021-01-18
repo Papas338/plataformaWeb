@@ -1,0 +1,64 @@
+@import "../../scss/index.scss";
+
+.error-lideresTemp {
+  text-align: center;
+  padding: 100px 15px;
+
+  svg {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 200px;
+    color: red;
+  }
+
+  h2 {
+    font-size: 35px;
+    font-weight: bold;
+  }
+}
+
+.lista-lideresTemp {
+  margin-top: 15px;
+  margin-bottom: 0;
+  padding: 15px 25px;
+
+  &__user {
+    padding: 10px 30px;
+    border-bottom: 1px solid $primary;
+
+    &:hover {
+      background-color: $primary-dark-light;
+    }
+
+    #usuario {
+      display: block;
+      padding: 10px 15px;
+      overflow: hidden;
+
+      h2 {
+        font-size: 20px;
+        color: $font-primary;
+      }
+
+      h3 {
+        font-size: 15px;
+        color: $font-grey;
+      }
+    }
+
+    #boton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        display: block;
+        width: 100%;
+        border-radius: 50px;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 5px 0;
+      }
+    }
+  }
+}
